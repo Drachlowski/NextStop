@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NextStop.Common\NextStop.Common.csproj" />
+    <ProjectReference Include="..\NextStop.Dal.Interface\NextStop.Dal.Interface.csproj" />
+    <ProjectReference Include="..\NextStop.Domain\NextStop.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
