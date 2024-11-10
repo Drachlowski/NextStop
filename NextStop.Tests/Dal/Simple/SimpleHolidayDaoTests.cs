@@ -2,7 +2,6 @@
 using NextStop.Dal.Domain;
 using NextStop.Dal.Interface;
 using NextStop.Dal.Simple;
-using Xunit;
 
 namespace NextStop.Tests.Dal.Simple;
 

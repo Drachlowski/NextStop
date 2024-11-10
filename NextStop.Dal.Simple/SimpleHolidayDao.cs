@@ -6,7 +6,7 @@ namespace NextStop.Dal.Simple;
 
 public class SimpleHolidayDao : IHolidayDao
 {
-    private List<Holiday> holidayList = new List<Holiday>();
+    private readonly List<Holiday> _holidayList = [];
 
     public void AddHoliday(Holiday holiday)
     {
@@ -14,36 +14,36 @@ public class SimpleHolidayDao : IHolidayDao
         {
             throw new DuplicateEntityException("Holiday", holiday.Id);
         }
-        holidayList.Add(holiday);
+        _holidayList.Add(holiday);
     }
 
     public void DeleteHoliday(int id)
     {
-        var holidayToRemove = holidayList.Find(h => h.Id == id);
-        if (holidayToRemove != null)
+        var holidayToRemove = GetHolidayById(id);
+        if (holidayToRemove is not null)
         {
-            holidayList.Remove(holidayToRemove);
+            _holidayList.Remove(holidayToRemove);
         }
     }
 
     public IEnumerable<Holiday> GetAllHolidays()
     {
-        return holidayList;
+        return _holidayList;
     }
 
     public Holiday? GetHolidayById(int id)
     {
-        return holidayList.FirstOrDefault(holiday => id == holiday.Id);
+        return _holidayList.FirstOrDefault(holiday => id == holiday.Id);
     }
 
     public IEnumerable<Holiday> GetHolidaysByDate(DateTime date)
     {
-        return holidayList.FindAll(holiday => holiday.Date.Date == date.Date);
+        return _holidayList.FindAll(holiday => holiday.Date.Date == date.Date);
     }
 
     public IEnumerable<Holiday> GetSchoolHolidays(DateTime startDate, DateTime endDate)
     {
-        return holidayList.FindAll(holiday =>
+        return _holidayList.FindAll(holiday =>
         {
             if (!holiday.IsSchoolHoliday) return false;
 
