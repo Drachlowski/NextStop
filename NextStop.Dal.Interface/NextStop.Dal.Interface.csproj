@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NextStop.Domain\NextStop.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
