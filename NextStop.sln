@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5AA9FA1D-128A-49A2-87A6-A21AE20AD4CF}"
 	ProjectSection(SolutionItems) = preProject
 		DDL.sql = DDL.sql
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextStop.Tests", "NextStop.Tests\NextStop.Tests.csproj", "{B601150D-EB9B-4E14-9D69-C393432B4133}"
