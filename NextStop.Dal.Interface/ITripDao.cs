@@ -9,7 +9,7 @@ namespace NextStop.Dal.Interface;
 
 public interface ITripDao
 {
-    Trip GetTripById(int id);
+    Trip? GetTripById(int id);
     IEnumerable<Trip> GetAllTrips();
     IEnumerable<Trip> GetTripsByRouteId(int routeId);
     IEnumerable<Trip> GetTripsByDate(DateTime date);
