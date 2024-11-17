@@ -17,11 +17,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextStop.Dal.Ado", "NextSto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5AA9FA1D-128A-49A2-87A6-A21AE20AD4CF}"
 	ProjectSection(SolutionItems) = preProject
+		COMPLETE.sql = COMPLETE.sql
 		DDL.sql = DDL.sql
+		INSERTS.sql = INSERTS.sql
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextStop.Tests", "NextStop.Tests\NextStop.Tests.csproj", "{B601150D-EB9B-4E14-9D69-C393432B4133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextStop.Tests", "NextStop.Tests\NextStop.Tests.csproj", "{B601150D-EB9B-4E14-9D69-C393432B4133}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database Statements", "Database Statements", "{B365190D-0918-4E57-98D1-947D5375780B}"
+	ProjectSection(SolutionItems) = preProject
+		COMPLETE.sql = COMPLETE.sql
+		DDL.sql = DDL.sql
+		INSERTS.sql = INSERTS.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +69,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B365190D-0918-4E57-98D1-947D5375780B} = {5AA9FA1D-128A-49A2-87A6-A21AE20AD4CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7DC0ACA4-0DDE-4226-B653-42F98B27AEEA}

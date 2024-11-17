@@ -49,5 +49,5 @@ CREATE TABLE Trip (
 
 
 CREATE INDEX IDX_Stop_Name ON Stop(Name);
-CREATE INDEX IDX_Route_RouteNumber ON Route(RouteNumber);
+CREATE INDEX IDX_Route_RouteName ON Route(RouteName);
 CREATE INDEX IDX_Holiday_Date ON Holiday(Date);
