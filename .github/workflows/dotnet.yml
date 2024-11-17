@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "Initializing database with init-db.sql..."
           docker cp ./init-db.sql $(docker ps -qf "ancestor=mcr.microsoft.com/mssql/server:2022-latest"):/init-db.sql
-          docker exec $(docker ps -qf "ancestor=mcr.microsoft.com/mssql/server:2022-latest") /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -i /init-db.sql
+          docker exec $(docker ps -qf "ancestor=mcr.microsoft.com/mssql/server:2022-latest") /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -C -i /init-db.sql
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
