@@ -42,7 +42,7 @@ jobs:
         run: |
           echo "Waiting for MSSQL Server to be ready..."
           for i in {1..30}; do
-            /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -Q "SELECT 1" && break
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -C -Q "SELECT 1" && break
             echo "Waiting..."
             sleep 5
           done
