@@ -17,8 +17,8 @@ public class SimpleHolidayDaoTests
 
     internal void PrefillHolidayDao()
     {
-        _sut.AddHoliday(new(1, "Weihnachtsfeiertage", DateTime.Parse("2024-12-24"), DateTime.Parse("2024-12-26"), true));
-        _sut.AddHoliday(new(2, "Neujahr", DateTime.Parse("2025-01-01"), null, true));
+        _sut.AddHoliday(new(1, "Weihnachtsfeiertage", DateTime.Parse("2024-12-24"), DateTime.Parse("2024-12-26"), false));
+        _sut.AddHoliday(new(2, "Neujahr", DateTime.Parse("2025-01-01"), null, false));
         _sut.AddHoliday(new(3, "Weihnachtsferien", DateTime.Parse("2024-12-23"), DateTime.Parse("2025-01-06"), true));
     }
 
@@ -96,8 +96,8 @@ public class SimpleHolidayDaoTests
     }
 
     [Theory]
-    [InlineData("2024-12-24", "2024-12-27", 2)]
-    [InlineData("2024-12-01", "2025-01-31", 3)]
+    [InlineData("2024-12-24", "2024-12-27", 1)]
+    [InlineData("2024-12-01", "2025-01-31", 1)]
     [InlineData("2024-12-01", "2024-12-23", 1)]
     [InlineData("2025-01-06", "2025-01-23", 1)]
     public void GetSchoolHolidays_ShouldReturnCorrectHolidays_WhenDatesMatch(string start, string end, int expected)
