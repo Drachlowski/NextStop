@@ -30,23 +30,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # - name: Start MSSQL Container
-      #   run: |
-      #     docker run -d --name mssql \
-      #       -e ACCEPT_EULA=Y \
-      #       -e SA_PASSWORD=Swk5-rocks! \
-      #       -p 1433:1433 \
-      #       mcr.microsoft.com/mssql/server:2022-latest
-
-      - name: Wait for MSSQL to be Ready
-        run: |
-          echo "Waiting for MSSQL Server to be ready..."
-          for i in {1..30}; do
-            /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -C -Q "SELECT 1" && break
-            echo "Waiting..."
-            sleep 5
-          done
-
       - name: Initialize Database
         run: |
           echo "Initializing database with init-db.sql..."
