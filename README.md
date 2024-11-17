@@ -59,7 +59,7 @@ Siehe INSERTS.sql, Beispiele auf Region Amstetten bezogen, sowie auch die Feiert
 ### Beziehung zwischen Route und Stop
 - 0..* zu 0..* Beziehung
 - Attribut StopSequence: Hier steht drinnen, welche Reihenfolge die Haltestelle in der Sequenz hat
-- Attribut Scheduled: Hier wird im Endeffekt vom Sequenz-Start weg angegeben, nach wievielen Minuten das Verkehrsmittel an der Haltestelle sein sollte.
+- Attribut Scheduled: Hier wird im Endeffekt vom Sequenz-Start weg (ist immer auf die Row davor bezogen) angegeben, nach wievielen Minuten das Verkehrsmittel an der Haltestelle sein sollte.
 
 ### Tabelle Trip
 Hierbei handelt es sich um die konkrete Fahrt, wo auch die aktuelle Verspätung in Minuten abgebildet ist.
