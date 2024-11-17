@@ -1,4 +1,11 @@
-﻿-- Feiertage / Schulferien
+﻿-- DB Erstellen
+CREATE DATABASE NextStop;
+GO
+
+USE NextStop;
+GO
+
+-- Feiertage / Schulferien
 CREATE TABLE Holiday (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Name NVARCHAR(100) NOT NULL,

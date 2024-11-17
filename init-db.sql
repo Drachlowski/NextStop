@@ -1,3 +1,10 @@
+-- DB Erstellen
+CREATE DATABASE NextStop;
+GO
+
+USE NextStop;
+GO
+
 -- Feiertage / Schulferien
 CREATE TABLE Holiday (
     Id INT PRIMARY KEY IDENTITY(1,1),
@@ -25,13 +32,13 @@ CREATE TABLE Route (
     DaysOfOperation NVARCHAR(50) NULL
 );
 
--- RouteStop: Verknüpfung von Haltestellen mit einer Route in fester Reihenfolge
+-- RouteStop: VerknÃ¼pfung von Haltestellen mit einer Route in fester Reihenfolge
 CREATE TABLE RouteStop (
     Id INT PRIMARY KEY IDENTITY(1,1),
     RouteId INT NOT NULL,
     StopId INT NOT NULL,
     StopSequence INT NOT NULL,             -- Reihenfolge der Haltestellen auf der Route
-    Scheduled INT DEFAULT 0,               -- Zeitverzögerung zur nächsten Haltestelle in Minuten
+    Scheduled INT DEFAULT 0,               -- ZeitverzÃ¶gerung zur nÃ¤chsten Haltestelle in Minuten
 
     FOREIGN KEY (RouteId) REFERENCES Route(Id) ON DELETE CASCADE,
     FOREIGN KEY (StopId) REFERENCES Stop(Id) ON DELETE CASCADE
@@ -42,7 +49,7 @@ CREATE TABLE Trip (
     Id INT PRIMARY KEY IDENTITY(1,1),
     RouteId INT NOT NULL,                  -- Die Route, die befahren wird
     StartTime TIME NOT NULL,               -- Geplante Startzeit der Fahrt
-    CurrentDelay INT DEFAULT 0,            -- Verspätung in Minuten (wird in Echtzeit angepasst)
+    CurrentDelay INT DEFAULT 0,            -- VerspÃ¤tung in Minuten (wird in Echtzeit angepasst)
     
     FOREIGN KEY (RouteId) REFERENCES Route(Id) ON DELETE CASCADE
 );
@@ -53,8 +60,7 @@ CREATE INDEX IDX_Route_RouteName ON Route(RouteName);
 CREATE INDEX IDX_Holiday_Date ON Holiday(Date);
 
 
-
--- Schulferien (Wurde basierend auf Niederösterreich angenommen)
+-- Schulferien (Wurde basierend auf NiederÃ¶sterreich angenommen)
 INSERT INTO Holiday (Name, Date, EndDate, IsSchoolHoliday) VALUES
    ('Herbstferien'      , '2024-10-28', '2024-10-31', 1),
    ('Weihnachtsferien'  , '2024-12-23', '2025-01-06', 1),
@@ -64,15 +70,15 @@ INSERT INTO Holiday (Name, Date, EndDate, IsSchoolHoliday) VALUES
    ('Sommerferien'      , '2025-06-28', '2025-08-31', 1);
 
 
--- Feiertage (Basierend auf Niederösterreich)
+-- Feiertage (Basierend auf NiederÃ¶sterreich)
 INSERT INTO Holiday (Name, Date) VALUES
    ('Nationalfeiertag'  , '2024-10-28'),
    ('Allerheiligen'     , '2024-11-01'),
-   (N'Mariä Empfängnis' , '2024-12-08'),
+   (N'MariÃ¤ EmpfÃ¤ngnis' , '2024-12-08'),
    ('Weihnachten'       , '2024-12-25'),
    ('Stefanitag'        , '2024-12-26'),
    ('Neujahr'           , '2025-01-01'),
-   (N'Heilige Drei Könige', '2025-01-06'),
+   (N'Heilige Drei KÃ¶nige', '2025-01-06'),
    ('Ostersonntag'      , '2025-04-20'),
    ('Ostermontag'       , '2025-04-21'),
    ('Staatsfeiertag'    , '2025-05-01'),
@@ -80,10 +86,10 @@ INSERT INTO Holiday (Name, Date) VALUES
    ('Pfingstsonntag'    , '2025-06-08'),
    ('Pfingstmontag'     , '2025-06-09'),
    ('Fronleichnam'      , '2025-06-19'),
-   (N'Mariä Himmelfahrt', '2025-08-15'),
+   (N'MariÃ¤ Himmelfahrt', '2025-08-15'),
    ('Nationalfeiertag'  , '2025-10-26'),
    ('Allerheiligen'     , '2025-11-01'),
-   (N'Mariä Empfängnis' , '2025-12-08'),
+   (N'MariÃ¤ EmpfÃ¤ngnis' , '2025-12-08'),
    ('Weihnachten'       , '2025-12-25'),
    ('Stefanitag'        , '2025-12-26');
 
@@ -93,7 +99,7 @@ INSERT INTO Stop (Name, ShortName, Latitude, Longitude) VALUES
     ('Amstetten Bahnhof', 'ABH', 48.121667, 14.878056),
     ('Greinsfurth', 'GRF', 48.108457, 14.839032),
     ('Ulmerfeld-Hausmening', 'UHM', 48.074854, 14.816269),
-    ('Mauer-Öhling', 'MOE', 48.092731, 14.804470),
+    ('Mauer-Ã–hling', 'MOE', 48.092731, 14.804470),
     ('Amstetten Krankenhaus', 'AKH', 48.128034, 14.882498),
     ('Amstetten Hauptplatz', 'AHP', 48.123410, 14.871478),
     ('Amstetten Landesberufsschule', 'ALB', 48.116979, 14.883463),
@@ -125,7 +131,7 @@ INSERT INTO RouteStop (RouteId, StopId, StopSequence, Scheduled) VALUES
     (1, 11, 7, 12),  -- Euratsfeld
     (1, 10, 8, 15),  -- Schloss Edla
     (1, 9, 9, 3),    -- Amstetten Rathaus
-    (1, 1, 10, 5);   -- Rückkehr Bahnhof
+    (1, 1, 10, 5);   -- RÃ¼ckkehr Bahnhof
 
 -- Route 2: Bahnhof - Hauptplatz - Neuhofen
 INSERT INTO RouteStop (RouteId, StopId, StopSequence, Scheduled) VALUES
@@ -134,11 +140,11 @@ INSERT INTO RouteStop (RouteId, StopId, StopSequence, Scheduled) VALUES
     (2, 9, 3, 2),    -- Amstetten Rathaus
     (2, 8, 4, 5),    -- Amstetten Wasserturm
     (2, 7, 5, 8),    -- Amstetten Landesberufsschule
-    (2, 4, 6, 15),   -- Mauer-Öhling
+    (2, 4, 6, 15),   -- Mauer-Ã–hling
     (2, 12, 7, 10),  -- Neuhofen an der Ybbs
     (2, 5, 8, 7),    -- Amstetten Krankenhaus
     (2, 14, 9, 6),   -- Preinsbach
-    (2, 1, 10, 5);   -- Rückkehr Bahnhof
+    (2, 1, 10, 5);   -- RÃ¼ckkehr Bahnhof
 
 -- Route 3: Bahnhof - Kollmitzberg - Zeillern
 INSERT INTO RouteStop (RouteId, StopId, StopSequence, Scheduled) VALUES
@@ -151,4 +157,4 @@ INSERT INTO RouteStop (RouteId, StopId, StopSequence, Scheduled) VALUES
     (3, 13, 7, 12),  -- Kollmitzberg
     (3, 15, 8, 10),  -- Zeillern
     (3, 5, 9, 15),   -- Amstetten Krankenhaus
-    (3, 1, 10, 5);   -- Rückkehr Bahnhof
+    (3, 1, 10, 5);   -- RÃ¼ckkehr Bahnhof

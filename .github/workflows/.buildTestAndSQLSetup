@@ -1,4 +1,4 @@
-name: Build, Test, and SQL Setup
+name: MSSQL Setup, Build, and Test in Container
 
 on:
   push:
@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  build-test-with-sql:
-    runs-on: ubuntu-latest
+  build-and-test:
+    runs-on: self-hosted
 
     services:
       mssql:
@@ -18,42 +18,50 @@ jobs:
         ports:
           - 1433:1433
         env:
-          SA_PASSWORD: "YourStrongPassword123!" # Starkes Passwort verwenden
           ACCEPT_EULA: "Y"
+          SA_PASSWORD: "Swk5-rocks!"
         options: >-
-          --health-cmd "exit 0" 
-          --health-interval 5s
+          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -Q 'SELECT 1'"
+          --health-interval 10s
           --health-timeout 5s
-          --health-retries 5
-          --name mssql
+          --health-retries 3
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
+
+      - name: Wait for MSSQL to be Ready
+        run: |
+          echo "Waiting for MSSQL Server to be ready..."
+          for i in {1..30}; do
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -Q "SELECT 1" && break
+            echo "Waiting..."
+            sleep 5
+          done
+
+      - name: Initialize Database
+        run: |
+          echo "Initializing database with init-db.sql..."
+          docker cp ./init-db.sql $(docker ps -qf "ancestor=mcr.microsoft.com/mssql/server:2022-latest"):/init-db.sql
+          docker exec $(docker ps -qf "ancestor=mcr.microsoft.com/mssql/server:2022-latest") /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Swk5-rocks! -i /init-db.sql
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0'
 
       - name: Restore Dependencies
         run: dotnet restore
 
-      - name: Wait for SQL Server
-        run: |
-          for i in {1..30}; do
-            /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrongPassword123!" -Q "SELECT 1" && break
-            sleep 5
-          done
-
-      - name: Execute COMPLETE.sql
-        run: |
-          /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrongPassword123!" -i ./path/to/COMPLETE.sql
-
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      - name: Build Project
+        run: dotnet build --configuration Release
 
       - name: Run Tests
         env:
-          ConnectionStrings__DefaultConnection: "Server=localhost;Database=TestDB;User Id=SA;Password=YourStrongPassword123!;"
-        run: dotnet test --configuration Release --no-build --verbosity normal
+          ConnectionStrings__NextStopDbConnection: "Server=localhost;Database=NextStop;User Id=sa;Password=Swk5-rocks!;Trust Server Certificate=True;"
+        run: dotnet test --configuration Release --verbosity normal
+
+      - name: Cleanup MSSQL
+        run: |
+          echo "Stopping and removing MSSQL container..."
+          docker rm -f $(docker ps -qf "ancestor=mcr.microsoft.com/mssql/server:2022-latest")
