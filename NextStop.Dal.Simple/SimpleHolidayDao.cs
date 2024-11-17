@@ -38,7 +38,11 @@ public class SimpleHolidayDao : IHolidayDao
 
     public IEnumerable<Holiday> GetHolidaysByDate(DateTime date)
     {
-        return _holidayList.FindAll(holiday => holiday.Date.Date == date.Date);
+        return _holidayList.FindAll(holiday => 
+            !holiday.IsSchoolHoliday &&
+            (holiday.Date.Date == date.Date ||
+            (holiday.EndDate is not null && holiday.Date <= date.Date && date.Date <= holiday.EndDate))
+            );
     }
 
     public IEnumerable<Holiday> GetSchoolHolidays(DateTime startDate, DateTime endDate)
