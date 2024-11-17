@@ -43,14 +43,24 @@ jobs:
 
       - name: Restore Dependencies
         run: dotnet restore
+        env:
+          DOTNET_CLI_HOME: /home/github-runner/actions-runner/_work/_temp
+          HOME: /home/github-runner
+
 
       - name: Build Project
         run: dotnet build --configuration Release
+        env:
+          DOTNET_CLI_HOME: /home/github-runner/actions-runner/_work/_temp
+          HOME: /home/github-runner
 
       - name: Run Tests
         env:
+          DOTNET_CLI_HOME: /home/github-runner/actions-runner/_work/_temp
+          HOME: /home/github-runner
           ConnectionStrings__NextStopDbConnection: "Server=localhost;Database=NextStop;User Id=sa;Password=Swk5-rocks!;Trust Server Certificate=True;"
         run: dotnet test --configuration Release --verbosity normal
+
 
       - name: Cleanup MSSQL
         run: |
