@@ -1,0 +1,59 @@
+name: Build, Test, and SQL Setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test-with-sql:
+    runs-on: ubuntu-latest
+
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        ports:
+          - 1433:1433
+        env:
+          SA_PASSWORD: "YourStrongPassword123!" # Starkes Passwort verwenden
+          ACCEPT_EULA: "Y"
+        options: >-
+          --health-cmd "exit 0" 
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+          --name mssql
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Wait for SQL Server
+        run: |
+          for i in {1..30}; do
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrongPassword123!" -Q "SELECT 1" && break
+            sleep 5
+          done
+
+      - name: Execute COMPLETE.sql
+        run: |
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrongPassword123!" -i ./path/to/COMPLETE.sql
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run Tests
+        env:
+          ConnectionStrings__DefaultConnection: "Server=localhost;Database=TestDB;User Id=SA;Password=YourStrongPassword123!;"
+        run: dotnet test --configuration Release --no-build --verbosity normal
