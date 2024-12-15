@@ -21,7 +21,8 @@
   <ItemGroup>
     <ProjectReference Include="..\NextStop.Dal.Ado\NextStop.Dal.Ado.csproj" />
     <ProjectReference Include="..\NextStop.Dal.Interface\NextStop.Dal.Interface.csproj" />
-    <ProjectReference Include="..\NextStop.Dal.Simple\NextStop.Dal.Simple.csproj" />
+	  <ProjectReference Include="..\NextStop.Server\NextStop.Server.csproj" />
+	  <ProjectReference Include="..\NextStop.Dal.Simple\NextStop.Dal.Simple.csproj" />
   </ItemGroup>
 
   <ItemGroup>

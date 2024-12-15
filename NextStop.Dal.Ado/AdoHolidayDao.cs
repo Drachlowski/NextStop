@@ -23,11 +23,11 @@ public class AdoHolidayDao(IConnectionFactory connectionFactory, string holidayT
     );
 
 
-    public void AddHoliday(Holiday holiday)
+    public async Task AddHolidayAsync(Holiday holiday)
     {
         try
         {
-            template.Execute($"""
+            await template.ExecuteAsync($"""
                 SET IDENTITY_INSERT {holidayTableName} ON;
 
                 INSERT INTO {holidayTableName} (Id, Name, Date, EndDate, IsSchoolHoliday)
@@ -48,28 +48,28 @@ public class AdoHolidayDao(IConnectionFactory connectionFactory, string holidayT
         }
     }
 
-    public void DeleteHoliday(int id)
+    public async Task DeleteHolidayAsync(int id)
     {
-        template.Execute($"DELETE FROM {holidayTableName} WHERE Id=@id", new QueryParameter("id", id));
+        await template.ExecuteAsync($"DELETE FROM {holidayTableName} WHERE Id=@id", new QueryParameter("id", id));
     }
 
-    public IEnumerable<Holiday> GetAllHolidays()
+    public async Task<IEnumerable<Holiday>> GetAllHolidaysAsync()
     {
-        return template.Query($"SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName}", MapRowToHoliday);
+        return await template.QueryAsync($"SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName}", MapRowToHoliday);
     }
 
-    public Holiday? GetHolidayById(int id)
+    public async Task<Holiday?> GetHolidayByIdAsync(int id)
     {
-        return template.QuerySingle(
+        return await template.QuerySingleAsync(
             $"SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName} WHERE id=@id",
             MapRowToHoliday,
             new QueryParameter("id", id)
         );
     }
 
-    public IEnumerable<Holiday> GetHolidaysByDate(DateTime date)
+    public async Task<IEnumerable<Holiday>> GetHolidaysByDateAsync(DateTime date)
     {
-        return template.Query($"""
+        return await template.QueryAsync($"""
             SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName}
                 WHERE IsSchoolHoliday = 0 AND (
                     Date = @date OR 
@@ -82,9 +82,9 @@ public class AdoHolidayDao(IConnectionFactory connectionFactory, string holidayT
         new QueryParameter("date", date));
     }
 
-    public IEnumerable<Holiday> GetSchoolHolidays(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysAsync(DateTime startDate, DateTime endDate)
     {
-        return template.Query($"""
+        return await template.QueryAsync($"""
             SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName}
                 WHERE IsSchoolHoliday = 1 AND (
                     EndDate >= @startDate AND Date <= @endDate
@@ -95,9 +95,9 @@ public class AdoHolidayDao(IConnectionFactory connectionFactory, string holidayT
         );
     }
 
-    public void UpdateHoliday(Holiday holiday)
+    public async Task UpdateHolidayAsync(Holiday holiday)
     {
-        template.Execute($"""
+        await template.ExecuteAsync($"""
                 SET IDENTITY_INSERT {holidayTableName} ON;
                 BEGIN TRANSACTION;
                 UPDATE {holidayTableName} SET Name=@name, Date=@date, EndDate=@endDate, IsSchoolHoliday=@isSchoolHoliday WHERE Id=@id;
@@ -116,4 +116,5 @@ public class AdoHolidayDao(IConnectionFactory connectionFactory, string holidayT
             new QueryParameter("isSchoolHoliday", holiday.IsSchoolHoliday)
             );
     }
+
 }

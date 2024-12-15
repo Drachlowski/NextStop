@@ -10,12 +10,19 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Riok.Mapperly" Version="4.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NextStop.Common\NextStop.Common.csproj" />
+    <ProjectReference Include="..\NextStop.Dal.Ado\NextStop.Dal.Ado.csproj" />
+    <ProjectReference Include="..\NextStop.Dal.Interface\NextStop.Dal.Interface.csproj" />
+    <ProjectReference Include="..\NextStop.Domain\NextStop.Domain.csproj" />
   </ItemGroup>
 
 </Project>

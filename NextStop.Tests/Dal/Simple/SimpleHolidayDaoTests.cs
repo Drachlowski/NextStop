@@ -15,70 +15,70 @@ public class SimpleHolidayDaoTests
         _sut = new SimpleHolidayDao();
     }
 
-    internal void PrefillHolidayDao()
+    internal async Task PrefillHolidayDao()
     {
-        _sut.AddHoliday(new(1, "Weihnachtsfeiertage", DateTime.Parse("2024-12-24"), DateTime.Parse("2024-12-26"), false));
-        _sut.AddHoliday(new(2, "Neujahr", DateTime.Parse("2025-01-01"), null, false));
-        _sut.AddHoliday(new(3, "Weihnachtsferien", DateTime.Parse("2024-12-23"), DateTime.Parse("2025-01-06"), true));
+        await _sut.AddHolidayAsync(new(1, "Weihnachtsfeiertage", DateTime.Parse("2024-12-24"), DateTime.Parse("2024-12-26"), false));
+        await _sut.AddHolidayAsync(new(2, "Neujahr", DateTime.Parse("2025-01-01"), null, false));
+        await _sut.AddHolidayAsync(new(3, "Weihnachtsferien", DateTime.Parse("2024-12-23"), DateTime.Parse("2025-01-06"), true));
     }
 
     [Fact]
-    public void GetAllHolidays_ShouldReturnEmptyList_WhenNoHolidaysAreAdded()
+    public async void GetAllHolidays_ShouldReturnEmptyList_WhenNoHolidaysAreAdded()
     {
-        var result = _sut.GetAllHolidays();
+        var result = await _sut.GetAllHolidaysAsync();
         Assert.NotNull(result);
         Assert.IsType<List<Holiday>>(result);
         Assert.Empty(result);
     }
 
     [Fact]
-    public void AddHoliday_ShouldAddHoliday_WhenHolidayIsValid()
+    public async void AddHoliday_ShouldAddHoliday_WhenHolidayIsValid()
     {
         Holiday holiday = new(1, "Weihnachten", DateTime.Parse("2024-12-24"), null, true);
-        _sut.AddHoliday(holiday);
-        var result = _sut.GetAllHolidays();
+        await _sut.AddHolidayAsync(holiday);
+        var result = await _sut.GetAllHolidaysAsync();
         Assert.NotNull(result);
         Assert.NotEmpty(result);
         Assert.Equal("Weihnachten", result.First().Name);
     }
 
     [Fact]
-    public void AddHoliday_ShouldNotAllowDuplicateId()
+    public async Task AddHoliday_ShouldNotAllowDuplicateId()
     {
         Holiday holiday1 = new(1, "Weihnachten", DateTime.Parse("2024-12-24"), null, true);
         Holiday holiday2 = new(1, "Silvester", DateTime.Parse("2024-12-31"), null, true);
-        _sut.AddHoliday(holiday1);
+        await _sut.AddHolidayAsync(holiday1);
 
-        Assert.Throws<DuplicateEntityException>(() => _sut.AddHoliday(holiday2));
+        await Assert.ThrowsAsync<DuplicateEntityException>(async () => await _sut.AddHolidayAsync(holiday2));
     }
 
     [Theory]
     [InlineData(1, "Weihnachtsfeiertage")]
     [InlineData(2, "Neujahr")]
     [InlineData(3, "Weihnachtsferien")]
-    public void GetHolidayById_ShouldReturnHolidayWithCorrectName_WhenIdIsValid(int id, string expected)
+    public async void GetHolidayById_ShouldReturnHolidayWithCorrectName_WhenIdIsValid(int id, string expected)
     {
-        PrefillHolidayDao();
-        var result = _sut.GetHolidayById(id);
+        await PrefillHolidayDao();
+        var result = await _sut.GetHolidayByIdAsync(id);
 
         Assert.NotNull(result);
         Assert.Equal(expected, result.Name);
     }
 
     [Fact]
-    public void GetHolidayById_ShouldReturnNull_WhenIdIsInvalid()
+    public async void GetHolidayById_ShouldReturnNull_WhenIdIsInvalid()
     {
-        PrefillHolidayDao();
-        var result = _sut.GetHolidayById(9999);
+        await PrefillHolidayDao();
+        var result = await _sut.GetHolidayByIdAsync(9999);
 
         Assert.Null(result);
     }
 
     [Fact]
-    public void GetHolidaysByDate_ShouldReturnCorrectHolidays_WhenDateMatches()
+    public async void GetHolidaysByDate_ShouldReturnCorrectHolidays_WhenDateMatches()
     {
-        PrefillHolidayDao();
-        var result = _sut.GetHolidaysByDate(DateTime.Parse("2024-12-24"));
+        await PrefillHolidayDao();
+        var result = await _sut.GetHolidaysByDateAsync(DateTime.Parse("2024-12-24"));
 
         Assert.NotNull(result);
         Assert.Single(result);
@@ -86,10 +86,10 @@ public class SimpleHolidayDaoTests
     }
 
     [Fact]
-    public void GetHolidaysByDate_ShouldReturnEmpty_WhenNoDateMatches()
+    public async void GetHolidaysByDate_ShouldReturnEmpty_WhenNoDateMatches()
     {
-        PrefillHolidayDao();
-        var result = _sut.GetHolidaysByDate(DateTime.Parse("2024-02-15"));
+        await PrefillHolidayDao();
+        var result = await _sut.GetHolidaysByDateAsync(DateTime.Parse("2024-02-15"));
 
         Assert.NotNull(result);
         Assert.Empty(result);
@@ -100,10 +100,10 @@ public class SimpleHolidayDaoTests
     [InlineData("2024-12-01", "2025-01-31", 1)]
     [InlineData("2024-12-01", "2024-12-23", 1)]
     [InlineData("2025-01-06", "2025-01-23", 1)]
-    public void GetSchoolHolidays_ShouldReturnCorrectHolidays_WhenDatesMatch(string start, string end, int expected)
+    public async void GetSchoolHolidays_ShouldReturnCorrectHolidays_WhenDatesMatch(string start, string end, int expected)
     {
-        PrefillHolidayDao();
-        var result = _sut.GetSchoolHolidays(DateTime.Parse(start), DateTime.Parse(end));
+        await PrefillHolidayDao();
+        var result = await _sut.GetSchoolHolidaysAsync(DateTime.Parse(start), DateTime.Parse(end));
 
         Assert.NotNull(result);
         Assert.Equal(expected, result.Count());
@@ -114,61 +114,61 @@ public class SimpleHolidayDaoTests
     }
 
     [Fact]
-    public void GetSchoolHolidays_ShouldReturnEmpty_WhenNoSchoolHolidaysInRange()
+    public async void GetSchoolHolidays_ShouldReturnEmpty_WhenNoSchoolHolidaysInRange()
     {
-        PrefillHolidayDao();
-        var result = _sut.GetSchoolHolidays(DateTime.Parse("2024-06-01"), DateTime.Parse("2024-06-15"));
+        await PrefillHolidayDao();
+        var result = await _sut.GetSchoolHolidaysAsync(DateTime.Parse("2024-06-01"), DateTime.Parse("2024-06-15"));
 
         Assert.NotNull(result);
         Assert.Empty(result);
     }
 
     [Fact]
-    public void DeleteHoliday_ShouldRemoveHoliday_WhenIdIsValid()
+    public async void DeleteHoliday_ShouldRemoveHoliday_WhenIdIsValid()
     {
-        PrefillHolidayDao();
-        var initialCount = _sut.GetAllHolidays().Count();
+        await PrefillHolidayDao();
+        var initialCount = (await _sut.GetAllHolidaysAsync()).Count();
 
-        _sut.DeleteHoliday(1);
+        await _sut.DeleteHolidayAsync(1);
 
-        var result = _sut.GetAllHolidays();
+        var result = await _sut.GetAllHolidaysAsync();
         Assert.Equal(initialCount - 1, result.Count());
-        Assert.Null(_sut.GetHolidayById(1));
+        Assert.Null(await _sut.GetHolidayByIdAsync(1));
     }
 
     [Fact]
-    public void DeleteHoliday_ShouldNotChangeList_WhenIdIsInvalid()
+    public async void DeleteHoliday_ShouldNotChangeList_WhenIdIsInvalid()
     {
-        PrefillHolidayDao();
-        var initialCount = _sut.GetAllHolidays().Count();
+        await PrefillHolidayDao();
+        var initialCount = (await _sut.GetAllHolidaysAsync()).Count();
 
-        _sut.DeleteHoliday(9999);
+        await _sut.DeleteHolidayAsync(9999);
 
-        var result = _sut.GetAllHolidays();
+        var result = await _sut.GetAllHolidaysAsync();
         Assert.Equal(initialCount, result.Count());
     }
 
     [Fact]
-    public void UpdateHoliday_ShouldModifyHoliday_WhenIdIsValid()
+    public async void UpdateHoliday_ShouldModifyHoliday_WhenIdIsValid()
     {
-        PrefillHolidayDao();
+        await PrefillHolidayDao();
         var updatedHoliday = new Holiday(1, "Updated Holiday", DateTime.Parse("2024-12-25"), DateTime.Parse("2024-12-26"), true);
 
-        _sut.UpdateHoliday(updatedHoliday);
+        await _sut.UpdateHolidayAsync(updatedHoliday);
 
-        var result = _sut.GetHolidayById(1);
+        var result = await _sut.GetHolidayByIdAsync(1);
         Assert.NotNull(result);
         Assert.Equal("Updated Holiday", result.Name);
     }
 
     [Fact]
-    public void UpdateHoliday_ShouldAddHoliday_WhenIdIsInvalid()
+    public async void UpdateHoliday_ShouldAddHoliday_WhenIdIsInvalid()
     {
-        PrefillHolidayDao();
+        await PrefillHolidayDao();
         var nonExistentHoliday = new Holiday(9999, "Non-existent Holiday", DateTime.Parse("2024-12-25"), DateTime.Parse("2024-12-26"), true);
-        _sut.UpdateHoliday(nonExistentHoliday);
+        await _sut.UpdateHolidayAsync(nonExistentHoliday);
 
-        var result = _sut.GetHolidayById(nonExistentHoliday.Id);
+        var result = await _sut.GetHolidayByIdAsync(nonExistentHoliday.Id);
         Assert.NotNull(result);
         Assert.Equal(result, nonExistentHoliday);
     }

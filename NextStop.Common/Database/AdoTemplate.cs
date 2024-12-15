@@ -59,4 +59,39 @@ public class AdoTemplate(IConnectionFactory connectionFactory)
 
         return command.ExecuteNonQuery();
     }
+
+    public async Task<IEnumerable<T>> QueryAsync<T>(string sql, rowMapper<T> mapper, params QueryParameter[] parameters)
+    {
+        using DbConnection connection = await connectionFactory.CreateConnectionAsync();
+
+        using DbCommand command = connection.CreateCommand();
+        command.CommandText = sql;
+        AddParameters(command, parameters);
+
+        using DbDataReader reader = await command.ExecuteReaderAsync();
+
+        var items = new List<T>();
+        while (await reader.ReadAsync())
+        {
+            items.Add(mapper(reader));
+        }
+
+        return items;
+    }
+
+    public async Task<T?> QuerySingleAsync<T>(string sql, rowMapper<T> mapper, params QueryParameter[] parameters)
+    {
+        return (await QueryAsync(sql, mapper, parameters)).SingleOrDefault();
+    }
+
+    public async Task<int> ExecuteAsync(string sql, params QueryParameter[] parameters)
+    {
+        using DbConnection connection = await connectionFactory.CreateConnectionAsync();
+
+        using DbCommand command = connection.CreateCommand();
+        command.CommandText = sql;
+        AddParameters(command, parameters);
+
+        return await command.ExecuteNonQueryAsync();
+    }
 }

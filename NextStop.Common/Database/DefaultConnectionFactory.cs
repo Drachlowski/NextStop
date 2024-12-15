@@ -10,7 +10,7 @@ namespace NextStop.Common.Database;
 
 public class DefaultConnectionFactory : IConnectionFactory
 {
-    private readonly DbProviderFactory dbProviderFactroy;
+    private readonly DbProviderFactory dbProviderFactory;
 
     public static IConnectionFactory FromConfiguration(IConfiguration configuration, string connectionConfigName, string providerConfigName)
     {
@@ -25,7 +25,7 @@ public class DefaultConnectionFactory : IConnectionFactory
         ProviderName = providerName;
         
         DbUtil.RegisterAdoProviders();
-        dbProviderFactroy = DbProviderFactories.GetFactory(providerName);
+        dbProviderFactory = DbProviderFactories.GetFactory(providerName);
     }
 
     public string ConnectionString { get; }
@@ -34,7 +34,7 @@ public class DefaultConnectionFactory : IConnectionFactory
 
     public DbConnection CreateConnection()
     {
-        DbConnection? connection = dbProviderFactroy.CreateConnection();
+        DbConnection? connection = dbProviderFactory.CreateConnection();
         if (connection is null)
         {
             throw new InvalidOperationException("DbProviderFactory.CreateConnection() returned null");
@@ -43,6 +43,20 @@ public class DefaultConnectionFactory : IConnectionFactory
         connection.ConnectionString = ConnectionString;
 
         connection.Open();
+        return connection;
+    }
+
+    public async Task<DbConnection> CreateConnectionAsync()
+    {
+        DbConnection? connection = dbProviderFactory.CreateConnection();
+        if (connection is null)
+        {
+            throw new InvalidOperationException("DbProviderFactory.CreateConnection() returned null");
+        }
+
+        connection.ConnectionString = ConnectionString;
+
+        await connection.OpenAsync();
         return connection;
     }
 }

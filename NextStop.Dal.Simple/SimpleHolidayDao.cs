@@ -8,46 +8,46 @@ public class SimpleHolidayDao : IHolidayDao
 {
     private readonly List<Holiday> _holidayList = [];
 
-    public void AddHoliday(Holiday holiday)
+    public async Task AddHolidayAsync(Holiday holiday)
     {
-        if (GetHolidayById(holiday.Id) is not null)
+        if (await GetHolidayByIdAsync(holiday.Id) is not null)
         {
             throw new DuplicateEntityException("Holiday", holiday.Id);
         }
         _holidayList.Add(holiday);
     }
 
-    public void DeleteHoliday(int id)
+    public async Task DeleteHolidayAsync(int id)
     {
-        var holidayToRemove = GetHolidayById(id);
+        var holidayToRemove = await GetHolidayByIdAsync(id);
         if (holidayToRemove is not null)
         {
             _holidayList.Remove(holidayToRemove);
         }
     }
 
-    public IEnumerable<Holiday> GetAllHolidays()
+    public async Task<IEnumerable<Holiday>> GetAllHolidaysAsync()
     {
-        return _holidayList;
+        return await Task.FromResult(_holidayList);
     }
 
-    public Holiday? GetHolidayById(int id)
+    public async Task<Holiday?> GetHolidayByIdAsync(int id)
     {
-        return _holidayList.FirstOrDefault(holiday => id == holiday.Id);
+        return await Task.FromResult(_holidayList.FirstOrDefault(holiday => id == holiday.Id));
     }
 
-    public IEnumerable<Holiday> GetHolidaysByDate(DateTime date)
+    public async Task<IEnumerable<Holiday>> GetHolidaysByDateAsync(DateTime date)
     {
-        return _holidayList.FindAll(holiday => 
+        return await Task.FromResult(_holidayList.FindAll(holiday => 
             !holiday.IsSchoolHoliday &&
             (holiday.Date.Date == date.Date ||
             (holiday.EndDate is not null && holiday.Date <= date.Date && date.Date <= holiday.EndDate))
-            );
+            ));
     }
 
-    public IEnumerable<Holiday> GetSchoolHolidays(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysAsync(DateTime startDate, DateTime endDate)
     {
-        return _holidayList.FindAll(holiday =>
+        return await Task.FromResult(_holidayList.FindAll(holiday =>
         {
             if (!holiday.IsSchoolHoliday) return false;
 
@@ -55,15 +55,15 @@ public class SimpleHolidayDao : IHolidayDao
             DateTime holidayEndDate = holiday.EndDate?.Date ?? holidayStartDate;
 
             return (startDate <= holidayEndDate && holidayStartDate <= endDate);
-        });
+        }));
     }
 
-    public void UpdateHoliday(Holiday holiday)
+    public async Task UpdateHolidayAsync(Holiday holiday)
     {
-        var existingHoliday = GetHolidayById(holiday.Id);
+        var existingHoliday = await GetHolidayByIdAsync(holiday.Id);
         if (existingHoliday is null)
         {
-            AddHoliday(holiday);
+            await AddHolidayAsync(holiday);
         }
         else
         {
