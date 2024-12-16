@@ -22,9 +22,9 @@ builder.Services.AddSwaggerGen();
 // Register Holiday services
 builder.Services.AddScoped<IHolidayService>(sp => new HolidayService(connectionFactory, holidayTableName));
 
-// Register Stop services
-builder.Services.AddScoped<IStopService, StopService>();
-builder.Services.AddScoped<IStopDao>(sp => new AdoStopDao(connectionFactory));
+// Register Route services
+builder.Services.AddScoped<IRouteDao>(sp => new AdoRouteDao(connectionFactory));
+builder.Services.AddScoped<IRouteService, RouteService>();
 
 var app = builder.Build();
 

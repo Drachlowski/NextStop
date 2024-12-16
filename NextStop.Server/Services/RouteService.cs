@@ -7,12 +7,12 @@ using NextStop.Domain;
 public class RouteService : IRouteService
 {
     private readonly IRouteDao _routeDao;
-    private readonly IRouteStopDao _routeStopDao;
+    //private readonly IRouteStopDao _routeStopDao;
 
-    public RouteService(IRouteDao routeDao, IRouteStopDao routeStopDao)
+    public RouteService(IRouteDao routeDao) //, IRouteStopDao routeStopDao)
     {
         _routeDao = routeDao;
-        _routeStopDao = routeStopDao;
+        //_routeStopDao = routeStopDao;
     }
 
     public async Task<IEnumerable<Route>> GetAllRoutesAsync()
@@ -42,7 +42,8 @@ public class RouteService : IRouteService
 
     public async Task<bool> HasLinkedStopsAsync(int routeId)
     {
-        var stops = await _routeStopDao.GetAllStopsForRouteAsync(routeId);
-        return stops.Any();
+        return await Task.FromResult(false);
+        //var stops = await _routeStopDao.GetAllStopsForRouteAsync(routeId);
+        //return stops.Any();
     }
 }
