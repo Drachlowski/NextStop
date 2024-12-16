@@ -15,10 +15,40 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<HolidayDto>>> GetHolidays() => Ok((await _holidayService.GetHolidaysAsync()).Select(c => c.ToHolidayDto()));
+    public async Task<ActionResult<IEnumerable<HolidayDto>>> GetHolidays(DateTime? date, DateTime? endDate, bool? schoolHolidaysOnly)
+    {
+        IEnumerable<Holiday> holidays;
+
+        if (date is not null && endDate is not null)
+        {
+            bool shouldGetSchoolHolidays = schoolHolidaysOnly.HasValue && schoolHolidaysOnly.Value;
+            DateTime normalizedStartDate = date.Value.Date;
+            DateTime normalizedEndDate = endDate.Value.Date;
+
+            if (shouldGetSchoolHolidays)
+            {
+                holidays = await _holidayService.GetSchoolHolidaysAsync(normalizedStartDate, normalizedEndDate);
+            }
+            else
+            {
+                holidays = await _holidayService.GetHolidaysByDateRangeAsync(normalizedStartDate, normalizedEndDate);
+            }
+        } 
+        else if (date is not null)
+        {
+            DateTime normalizedStartDate = date.Value.Date;
+            holidays = await _holidayService.GetHolidaysByDateAsync(normalizedStartDate);
+        }
+        else
+        {
+            holidays = await _holidayService.GetHolidaysAsync();
+        }
+        return Ok(holidays.Select(c => c.ToHolidayDto()));
+    }
 
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpGet("{holidayId}")]
     public async Task<ActionResult<HolidayDto>> GetHolidayById(int holidayId)
     {
@@ -51,6 +81,9 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
         );
     }
 
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpPut("{holidayId}")]
     public async Task<ActionResult> UpdateHoliday(int holidayId, [FromBody] HolidayForUpdateDto holidayForCreationDto)
     {
@@ -63,6 +96,9 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
         return NoContent();
     }
 
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpDelete("{holidayId}")]
     public async Task<ActionResult> DeleteHoliday(int holidayId)
     {

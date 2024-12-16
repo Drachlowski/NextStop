@@ -30,19 +30,19 @@ public class HolidayService(IConnectionFactory connectionFactory, string holiday
         return await _dataSource.GetAllHolidaysAsync();
     }
 
-    public Task<IEnumerable<Holiday>> GetHolidaysByDateAsync(DateTime date)
+    public async Task<IEnumerable<Holiday>> GetHolidaysByDateAsync(DateTime date)
     {
-        throw new NotImplementedException();
+        return await _dataSource.GetHolidaysByDateAsync(date);
     }
 
-    public Task<IEnumerable<Holiday>> GetHolidaysByDateRangeAsync(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Holiday>> GetHolidaysByDateRangeAsync(DateTime startDate, DateTime endDate)
     {
-        throw new NotImplementedException();
+        return await _dataSource.GetHolidaysByDateRangeAsync(startDate, endDate);
     }
 
-    public Task<IEnumerable<Holiday>> GetSchoolHolidaysAsync(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysAsync(DateTime startDate, DateTime endDate)
     {
-        throw new NotImplementedException();
+        return await _dataSource.GetSchoolHolidaysByDateRangeAsync(startDate, endDate);
     }
 
     public async Task<bool> HolidayExistsAsync(int id)

@@ -103,7 +103,7 @@ public class SimpleHolidayDaoTests
     public async void GetSchoolHolidays_ShouldReturnCorrectHolidays_WhenDatesMatch(string start, string end, int expected)
     {
         await PrefillHolidayDao();
-        var result = await _sut.GetSchoolHolidaysAsync(DateTime.Parse(start), DateTime.Parse(end));
+        var result = await _sut.GetSchoolHolidaysByDateRangeAsync(DateTime.Parse(start), DateTime.Parse(end));
 
         Assert.NotNull(result);
         Assert.Equal(expected, result.Count());
@@ -117,7 +117,7 @@ public class SimpleHolidayDaoTests
     public async void GetSchoolHolidays_ShouldReturnEmpty_WhenNoSchoolHolidaysInRange()
     {
         await PrefillHolidayDao();
-        var result = await _sut.GetSchoolHolidaysAsync(DateTime.Parse("2024-06-01"), DateTime.Parse("2024-06-15"));
+        var result = await _sut.GetSchoolHolidaysByDateRangeAsync(DateTime.Parse("2024-06-01"), DateTime.Parse("2024-06-15"));
 
         Assert.NotNull(result);
         Assert.Empty(result);

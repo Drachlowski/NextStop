@@ -82,12 +82,27 @@ public class AdoHolidayDao(IConnectionFactory connectionFactory, string holidayT
         new QueryParameter("date", date));
     }
 
-    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysAsync(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Holiday>> GetHolidaysByDateRangeAsync(DateTime startDate, DateTime endDate)
+    {
+        return await template.QueryAsync($"""
+            SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName}
+                WHERE IsSchoolHoliday = 0 AND (
+                    ( EndDate >= @startDate AND Date <= @endDate ) OR
+                    ( EndDate IS NULL AND @startDate <= Date AND Date <= @endDate)
+                )
+        """, MapRowToHoliday,
+        new QueryParameter("startDate", startDate),
+        new QueryParameter("endDate", endDate)
+        );
+    }
+
+    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysByDateRangeAsync(DateTime startDate, DateTime endDate)
     {
         return await template.QueryAsync($"""
             SELECT Id, Name, Date, EndDate, IsSchoolHoliday FROM {holidayTableName}
                 WHERE IsSchoolHoliday = 1 AND (
-                    EndDate >= @startDate AND Date <= @endDate
+                    ( EndDate >= @startDate AND Date <= @endDate ) OR
+                    ( EndDate IS NULL AND @startDate <= Date AND Date <= @endDate)
                 )
         """, MapRowToHoliday,
         new QueryParameter("startDate", startDate),

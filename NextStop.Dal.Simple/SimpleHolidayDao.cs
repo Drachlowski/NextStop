@@ -45,7 +45,12 @@ public class SimpleHolidayDao : IHolidayDao
             ));
     }
 
-    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysAsync(DateTime startDate, DateTime endDate)
+    public Task<IEnumerable<Holiday>> GetHolidaysByDateRangeAsync(DateTime startDate, DateTime endDate)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<Holiday>> GetSchoolHolidaysByDateRangeAsync(DateTime startDate, DateTime endDate)
     {
         return await Task.FromResult(_holidayList.FindAll(holiday =>
         {
