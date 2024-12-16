@@ -9,10 +9,10 @@ namespace NextStop.Dal.Interface;
 
 public interface IRouteDao
 {
-    Route? GetRouteById(int id);
-    IEnumerable<Route> GetAllRoutes();
-    IEnumerable<Route> GetActiveRoutes(DateTime date);
-    void AddRoute(Route route);
-    void UpdateRoute(Route route);
-    void DeleteRoute(int id);
+    Task<Route?> GetRouteByIdAsync(int id);
+    Task<IEnumerable<Route>> GetAllRoutesAsync();
+    Task<IEnumerable<Route>> GetActiveRoutesAsync(DateTime date);
+    Task AddRouteAsync(Route route);
+    Task UpdateRouteAsync(Route route);
+    Task DeleteRouteAsync(int id);
 }

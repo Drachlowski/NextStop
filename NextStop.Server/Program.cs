@@ -1,6 +1,6 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using NextStop.Common.Database;
+using NextStop.Dal.Ado;
+using NextStop.Dal.Interface;
 using NextStop.Server.Services;
 
 IConfiguration configuration = ConfigurationUtil.GetConfiguration();
@@ -15,14 +15,16 @@ IConnectionFactory connectionFactory = DefaultConnectionFactory.FromConfiguratio
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddScoped<IHolidayService, HolidayService(connectionFactory, holidayTableName) >();
-builder.Services.AddScoped<IHolidayService>(sp =>
-    new HolidayService(connectionFactory, holidayTableName));
+
+// Register Holiday services
+builder.Services.AddScoped<IHolidayService>(sp => new HolidayService(connectionFactory, holidayTableName));
+
+// Register Stop services
+builder.Services.AddScoped<IStopService, StopService>();
+builder.Services.AddScoped<IStopDao>(sp => new AdoStopDao(connectionFactory));
 
 var app = builder.Build();
 
@@ -34,9 +36,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

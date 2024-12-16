@@ -1,10 +1,19 @@
 ﻿namespace NextStop.Domain;
 
-public class Stop(int id, string name, string shortName, double latitude, double longitude)
+public class Stop
 {
-    public int Id { get; set; } = id;
-    public string Name { get; set; } = name;
-    public string ShortName { get; set; } = shortName;
-    public double Latitude { get; set; } = latitude;
-    public double Longitude { get; set; } = longitude;
+    public Stop(int id, string name, string shortName, double latitude, double longitude)
+    {
+        Id = id;
+        Name = name;
+        ShortName = shortName;
+        Latitude = latitude;
+        Longitude = longitude;
+    }
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string ShortName { get; set; }
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
 }

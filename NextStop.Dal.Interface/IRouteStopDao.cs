@@ -9,11 +9,11 @@ namespace NextStop.Dal.Interface;
 
 public interface IRouteStopDao
 {
-    RouteStop? GetRouteStopById(int id);
-    IEnumerable<RouteStop> GetAllRouteStops();
-    IEnumerable<Route> GetAllRoutesForStop(int stopId);
-    IEnumerable<Stop> GetAllStopsForRoute(int routeId);
-    void AddRouteStop(RouteStop routeStop);
-    void UpdateRouteStop(RouteStop routeStop);
-    void DeleteRouteStop(int id);
+    Task<RouteStop?> GetRouteStopByIdAsync(int id);
+    Task<IEnumerable<RouteStop>> GetAllRouteStopsAsync();
+    Task<IEnumerable<Route>> GetAllRoutesForStopAsync(int stopId);
+    Task<IEnumerable<Stop>> GetAllStopsForRouteAsync(int routeId);
+    Task AddRouteStopAsync(RouteStop routeStop);
+    Task UpdateRouteStopAsync(RouteStop routeStop);
+    Task DeleteRouteStopAsync(int id);
 }

@@ -9,12 +9,12 @@ namespace NextStop.Dal.Interface;
 
 public interface ITripDao
 {
-    Trip? GetTripById(int id);
-    IEnumerable<Trip> GetAllTrips();
-    IEnumerable<Trip> GetTripsByRouteId(int routeId);
-    IEnumerable<Trip> GetTripsByDate(DateTime date);
-    IEnumerable<Trip> GetTripsWithCurrentDelay();
-    void AddTrip(Trip trip);
-    void UpdateTrip(Trip trip);
-    void DeleteTrip(int id);
+    Task<Trip?> GetTripByIdAsync(int id);
+    Task<IEnumerable<Trip>> GetAllTripsAsync();
+    Task<IEnumerable<Trip>> GetTripsByRouteIdAsync(int routeId);
+    Task<IEnumerable<Trip>> GetTripsByDateAsync(DateTime date);
+    Task<IEnumerable<Trip>> GetTripsWithCurrentDelayAsync();
+    Task AddTripAsync(Trip trip);
+    Task UpdateTripAsync(Trip trip);
+    Task DeleteTripAsync(int id);
 }

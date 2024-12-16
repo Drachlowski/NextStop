@@ -1,13 +1,8 @@
 ﻿using NextStop.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NextStop.Dal.Interface;
+namespace NextStop.Server.Services;
 
-public interface IStopDao
+public interface IStopService
 {
     Task<Stop?> GetStopByIdAsync(int id);
     Task<IEnumerable<Stop>> GetAllStopsAsync();
