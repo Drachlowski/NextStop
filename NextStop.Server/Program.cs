@@ -26,6 +26,9 @@ builder.Services.AddScoped<IHolidayService>(sp => new HolidayService(connectionF
 builder.Services.AddScoped<IRouteDao>(sp => new AdoRouteDao(connectionFactory));
 builder.Services.AddScoped<IRouteService, RouteService>();
 
+builder.Services.AddScoped<IStopDao>(sp => new AdoStopDao(connectionFactory));
+builder.Services.AddScoped<IStopService, StopService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

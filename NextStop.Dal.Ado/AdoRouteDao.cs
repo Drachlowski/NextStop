@@ -55,7 +55,13 @@ public class AdoRouteDao : IRouteDao
     public async Task AddRouteAsync(Route route)
     {
         await _template.ExecuteAsync(
-            "INSERT INTO Route (Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation) VALUES (@id, @routeName, @validityStartDate, @validityEndDate, @daysOfOperation)",
+            """
+                SET IDENTITY_INSERT Route ON;
+            
+                INSERT INTO Route (Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation) VALUES (@id, @routeName, @validityStartDate, @validityEndDate, @daysOfOperation);
+            
+                SET IDENTITY_INSERT Route OFF;
+            """,
             new QueryParameter("id", route.Id),
             new QueryParameter("routeName", route.RouteName),
             new QueryParameter("validityStartDate", route.ValidityStartDate),
