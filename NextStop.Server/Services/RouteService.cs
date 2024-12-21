@@ -46,4 +46,9 @@ public class RouteService : IRouteService
         //var stops = await _routeStopDao.GetAllStopsForRouteAsync(routeId);
         //return stops.Any();
     }
+
+    public async Task<bool> RouteExistsAsync(int id)
+    {
+        return await GetRouteByIdAsync(id) is not null;
+    }
 }

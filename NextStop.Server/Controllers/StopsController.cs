@@ -55,6 +55,10 @@ public class StopsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<StopDto>> AddStop([FromBody] StopForCreationDto stopDto)
     {
+        if (await _stopService.StopExistsAsync(stopDto.Id))
+        {
+            return Conflict();
+        }
         var stop = stopDto.ToStop();
         await _stopService.AddStopAsync(stop);
         return CreatedAtAction(nameof(GetStopById), new { id = stop.Id }, stop.ToStopDto());

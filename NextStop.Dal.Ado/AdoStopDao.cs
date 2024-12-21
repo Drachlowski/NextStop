@@ -70,12 +70,13 @@ public class AdoStopDao : IStopDao
     {
         await _template.ExecuteAsync(
             """
-            SET IDENTITY_INSERT {holidayTableName} ON;
+            SET IDENTITY_INSERT Stop ON;
 
-            INSERT INTO Stop (Name, ShortName, Latitude, Longitude) VALUES (@name, @shortName, @latitude, @longitude)
+            INSERT INTO Stop (Id, Name, ShortName, Latitude, Longitude) VALUES (@id, @name, @shortName, @latitude, @longitude);
 
-            SET IDENTITY_INSERT {holidayTableName} OFF;
+            SET IDENTITY_INSERT Stop OFF;
             """,
+            new QueryParameter("id", stop.Id),
             new QueryParameter("name", stop.Name),
             new QueryParameter("shortName", stop.ShortName),
             new QueryParameter("latitude", stop.Latitude),

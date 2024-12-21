@@ -10,4 +10,5 @@ public interface IRouteService
     Task UpdateRouteAsync(Route route);
     Task DeleteRouteAsync(int id);
     Task<bool> HasLinkedStopsAsync(int routeId);
+    Task<bool> RouteExistsAsync(int id);
 }

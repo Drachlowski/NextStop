@@ -11,4 +11,5 @@ public interface IStopService
     Task AddStopAsync(Stop stop);
     Task UpdateStopAsync(Stop stop);
     Task DeleteStopAsync(int id);
+    Task<bool> StopExistsAsync(int id);
 }

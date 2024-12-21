@@ -46,4 +46,9 @@ public class StopService : IStopService
     {
         await _stopDao.DeleteStopAsync(id);
     }
+
+    public async Task<bool> StopExistsAsync(int id)
+    {
+        return await GetStopByIdAsync(id) is not null;
+    }
 }

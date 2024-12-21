@@ -41,6 +41,10 @@ public class RoutesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<RouteDto>> AddRoute([FromBody] RouteForCreationDto routeDto)
     {
+        if (await _routeService.RouteExistsAsync(routeDto.Id))
+        {
+            return Conflict();
+        }
         var route = routeDto.ToRoute();
         await _routeService.AddRouteAsync(route);
         return CreatedAtAction(nameof(GetRouteById), new { id = route.Id }, route.ToRouteDto());
@@ -63,8 +67,7 @@ public class RoutesController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRoute(int id)
     {
-        var isLinked = await _routeService.HasLinkedStopsAsync(id);
-        if (isLinked)
+        if (await _routeService.HasLinkedStopsAsync(id))
         {
             return Conflict("Route cannot be deleted as it has linked stops.");
         }
