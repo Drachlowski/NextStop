@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NextStop.Domain;
+﻿namespace NextStop.Domain;
 
 public class RouteStop(int id, int routeId, int stopId, int stopSequence, int scheduled, Route route, Stop stop)
 {

@@ -102,7 +102,7 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
     [HttpDelete("{holidayId}")]
     public async Task<ActionResult> DeleteHoliday(int holidayId)
     {
-        if (await _holidayService.GetHolidayByIdAsync(holidayId) is null)
+        if (!await _holidayService.HolidayExistsAsync(holidayId))
         {
             return NotFound();
         }

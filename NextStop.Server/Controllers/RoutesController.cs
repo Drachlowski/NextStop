@@ -67,6 +67,11 @@ public class RoutesController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRoute(int id)
     {
+        if (!await _routeService.RouteExistsAsync(id))
+        {
+            return NotFound();
+        }
+
         if (await _routeService.HasLinkedStopsAsync(id))
         {
             return Conflict("Route cannot be deleted as it has linked stops.");

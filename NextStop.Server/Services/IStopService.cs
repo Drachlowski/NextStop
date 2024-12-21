@@ -11,5 +11,7 @@ public interface IStopService
     Task AddStopAsync(Stop stop);
     Task UpdateStopAsync(Stop stop);
     Task DeleteStopAsync(int id);
+    Task<bool> HasLinkedRoutesAsync(int stopId);
+    
     Task<bool> StopExistsAsync(int id);
 }

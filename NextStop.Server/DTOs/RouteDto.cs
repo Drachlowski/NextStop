@@ -1,4 +1,6 @@
-﻿namespace NextStop.Server.DTOs;
+﻿using NextStop.Domain;
+
+namespace NextStop.Server.DTOs;
 
 public class RouteDto
 {

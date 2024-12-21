@@ -51,4 +51,11 @@ public class StopService : IStopService
     {
         return await GetStopByIdAsync(id) is not null;
     }
+
+    public async Task<bool> HasLinkedRoutesAsync(int stopId)
+    {
+        return await Task.FromResult(false);
+        //var routes = await _routeStopDao.GetAllRoutesForStopAsync(stopId);
+        //return routes.Any();
+    }
 }

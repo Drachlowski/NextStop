@@ -81,10 +81,14 @@ public class StopsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteStop(int id)
     {
-        var stop = await _stopService.GetStopByIdAsync(id);
-        if (stop == null)
+        if (!await _stopService.StopExistsAsync(id))
         {
             return NotFound();
+        }
+
+        if (await _stopService.HasLinkedRoutesAsync(id))
+        {
+            return Conflict("Stop cannot be deleted as it has linked stops.");
         }
 
         await _stopService.DeleteStopAsync(id);

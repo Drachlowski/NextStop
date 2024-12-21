@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NextStop.Domain;
+﻿namespace NextStop.Domain;
 
 public class Trip(int id, int routeId, TimeSpan startTime, int currentDelay, Route route)
 {

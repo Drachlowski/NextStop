@@ -29,6 +29,9 @@ builder.Services.AddScoped<IRouteService, RouteService>();
 builder.Services.AddScoped<IStopDao>(sp => new AdoStopDao(connectionFactory));
 builder.Services.AddScoped<IStopService, StopService>();
 
+builder.Services.AddScoped<IRouteStopDao>(sp => new AdoRouteStopDao(connectionFactory));
+builder.Services.AddScoped<IRouteStopService, RouteStopService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

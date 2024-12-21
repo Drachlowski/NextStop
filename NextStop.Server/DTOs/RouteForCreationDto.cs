@@ -1,6 +1,6 @@
-﻿namespace NextStop.Server.DTOs;
+﻿using NextStop.Domain;
 
-using NextStop.Domain;
+namespace NextStop.Server.DTOs;
 
 public class RouteForCreationDto
 {

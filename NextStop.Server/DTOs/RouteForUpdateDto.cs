@@ -1,5 +1,6 @@
 ﻿namespace NextStop.Server.DTOs;
 
+
 public class RouteForUpdateDto
 {
     public required int Id { get; set; } // ID hinzugefügt
