@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "8033e6e9-857c-4c9d-8054-fdcecbbdf813",
+		"name": "Holidays",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40444845"
+	},
+	"item": [
+		{
+			"name": "GetHolidays",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHolidaysByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays?date=2024-12-25",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-12-25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHolidaysByDateRange",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays?date=2024-12-25&endDate=2025-01-31",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-12-25"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-01-31"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHolidaysByDateRangeAndSchoolHolidaysOnly",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays?date=2024-12-25&endDate=2025-01-31&schoolHolidaysOnly=true",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-12-25"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-01-31"
+						},
+						{
+							"key": "schoolHolidaysOnly",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHolidayById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays/1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHolidayByIdShouldReturn404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays/-1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateHolidays",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 27,\r\n    \"name\": \"Birthday\",\r\n    \"date\": \"2025-02-16\",\r\n    \"endDate\": null,\r\n    \"isSchoolHoliday\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateHolidaysShouldReturn409",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Birthday\",\r\n    \"date\": \"2025-02-16\",\r\n    \"endDate\": null,\r\n    \"isSchoolHoliday\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditHolidays",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 27,\r\n    \"name\": \"Birthday Andi\",\r\n    \"date\": \"2025-02-16\",\r\n    \"endDate\": null,\r\n    \"isSchoolHoliday\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays/27",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays",
+						"27"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEditedHoliday",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays/27",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays",
+						"27"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteHolidays",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Holidays/27",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Holidays",
+						"27"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

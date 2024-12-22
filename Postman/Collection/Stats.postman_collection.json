@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "3cfa0003-1665-4c53-a01f-753f7f1b4acf",
+		"name": "Stats",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40444845"
+	},
+	"item": [
+		{
+			"name": "GetStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/statistics/delay?startDate=2024-01-01&endDate=2025-01-01",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"statistics",
+						"delay"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2024-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-01-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStatsByRoute",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/statistics/delay?startDate=2024-01-01&endDate=2025-01-01&routeId=1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"statistics",
+						"delay"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2024-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-01-01"
+						},
+						{
+							"key": "routeId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStatsByRouteShouldReturnEmptyList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/statistics/delay?startDate=2024-01-01&endDate=2025-01-01&routeId=2",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"statistics",
+						"delay"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2024-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-01-01"
+						},
+						{
+							"key": "routeId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

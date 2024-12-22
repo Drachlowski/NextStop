@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "502bbdd1-756d-4e77-baed-940cf0f6d894",
+		"name": "Trips",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40444845"
+	},
+	"item": [
+		{
+			"name": "GetTrips",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Trips",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetNextDeparturesFromStop",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Trips/next-departures/1?currentTime=2024-12-22",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips",
+						"next-departures",
+						"1"
+					],
+					"query": [
+						{
+							"key": "currentTime",
+							"value": "2024-12-22"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTripById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Trips/1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTrip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"routeId\": 1,\r\n  \"startTime\": \"2024-08-11T00:00:00\",\r\n  \"currentDelay\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Trips",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditTrip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"routeId\": 2,\r\n  \"startTime\": \"2024-08-12T00:00:00\",\r\n  \"currentDelay\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Trips/2",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEditedTrip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Trips/2",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteTrip",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Trips/2",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTimeTable",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"startStopId\": 1,\r\n  \"endStopId\": 3,\r\n  \"departureTime\": \"2024-12-22T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Trips/timetable",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Trips",
+						"timetable"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

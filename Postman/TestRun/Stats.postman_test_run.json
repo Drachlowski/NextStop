@@ -1,0 +1,88 @@
+{
+	"id": "56186271-9069-43e3-a879-c5946980a72e",
+	"name": "Stats",
+	"timestamp": "2024-12-22T22:35:01.135Z",
+	"collection_id": "40444845-3cfa0003-1665-4c53-a01f-753f7f1b4acf",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:35:00.674Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "493c2c5a-5d30-4a0d-bdb8-b6a66b70775b",
+			"name": "GetStats",
+			"url": "https://localhost:7002/api/Routes/statistics/delay?startDate=2024-01-01&endDate=2025-01-01",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3c73968a-bc8a-4cb0-833b-3581613b38d1",
+			"name": "GetStatsByRoute",
+			"url": "https://localhost:7002/api/Routes/statistics/delay?startDate=2024-01-01&endDate=2025-01-01&routeId=1",
+			"time": 3,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d47a411b-79ae-4ab4-92fb-30939604627f",
+			"name": "GetStatsByRouteShouldReturnEmptyList",
+			"url": "https://localhost:7002/api/Routes/statistics/delay?startDate=2024-01-01&endDate=2025-01-01&routeId=2",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 11,
+	"collection": {
+		"requests": [
+			{
+				"id": "493c2c5a-5d30-4a0d-bdb8-b6a66b70775b",
+				"method": "GET"
+			},
+			{
+				"id": "3c73968a-bc8a-4cb0-833b-3581613b38d1",
+				"method": "GET"
+			},
+			{
+				"id": "d47a411b-79ae-4ab4-92fb-30939604627f",
+				"method": "GET"
+			}
+		]
+	}
+}

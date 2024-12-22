@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "ef009c12-1f2e-45a5-b56a-d18ceff9bcb7",
+		"name": "CheckIn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40444845"
+	},
+	"item": [
+		{
+			"name": "GetCheckInsByTripId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/TripCheckIn/1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"TripCheckIn",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tripId\": 1,\r\n  \"routeStopId\": 2,\r\n  \"checkInTime\": \"2024-12-22T22:36:29.139Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/TripCheckIn",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"TripCheckIn"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

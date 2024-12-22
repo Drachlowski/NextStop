@@ -1,0 +1,176 @@
+{
+	"id": "4bc0d174-6567-4f34-a1bb-e4ae4b0e8b9b",
+	"name": "RouteStops",
+	"timestamp": "2024-12-22T22:28:19.175Z",
+	"collection_id": "40444845-325942f1-99f6-4a08-b3a2-4006f5ee1e42",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:28:18.313Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "36cdf592-d60b-4405-8bf2-0546c5f209a4",
+			"name": "GetRouteStops",
+			"url": "https://localhost:7002/api/RouteStops",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1ea81fe1-823e-4aee-a0a2-e8d55d62b10c",
+			"name": "GetRouteStopsById",
+			"url": "https://localhost:7002/api/RouteStops/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c46adef0-518c-4d2a-b726-4dabd471c580",
+			"name": "GetRouteStopsByIdShouldReturn404",
+			"url": "https://localhost:7002/api/RouteStops/-1",
+			"time": 6,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d11aa2af-ddae-4357-a40f-329106aa6cdb",
+			"name": "CreateRouteStop",
+			"url": "https://localhost:7002/api/RouteStops",
+			"time": 26,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				26
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "54120912-8ead-4e9e-89fd-58301d61ef41",
+			"name": "EditRouteStop",
+			"url": "https://localhost:7002/api/RouteStops/31",
+			"time": 21,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				21
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ff39831d-932a-4e5d-b387-b3d885357104",
+			"name": "GetEditedRouteStop",
+			"url": "https://localhost:7002/api/RouteStops/31",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "37142ee7-3d7d-417c-a7bd-8d4c017b6152",
+			"name": "DeleteRouteStop",
+			"url": "https://localhost:7002/api/RouteStops/31",
+			"time": 17,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 105,
+	"collection": {
+		"requests": [
+			{
+				"id": "36cdf592-d60b-4405-8bf2-0546c5f209a4",
+				"method": "GET"
+			},
+			{
+				"id": "1ea81fe1-823e-4aee-a0a2-e8d55d62b10c",
+				"method": "GET"
+			},
+			{
+				"id": "c46adef0-518c-4d2a-b726-4dabd471c580",
+				"method": "GET"
+			},
+			{
+				"id": "d11aa2af-ddae-4357-a40f-329106aa6cdb",
+				"method": "POST"
+			},
+			{
+				"id": "54120912-8ead-4e9e-89fd-58301d61ef41",
+				"method": "PUT"
+			},
+			{
+				"id": "ff39831d-932a-4e5d-b387-b3d885357104",
+				"method": "GET"
+			},
+			{
+				"id": "37142ee7-3d7d-417c-a7bd-8d4c017b6152",
+				"method": "DELETE"
+			}
+		]
+	}
+}

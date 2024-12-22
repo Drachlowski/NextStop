@@ -1,0 +1,242 @@
+{
+	"id": "124f23f3-d853-4f95-a1af-2a8c6fe07bfe",
+	"name": "Stops",
+	"timestamp": "2024-12-22T22:28:31.969Z",
+	"collection_id": "40444845-756592e6-b4aa-4a4b-902d-22a1d67adf75",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:28:30.869Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "2f6eea6b-c21f-4435-adb8-14f759ab8e0f",
+			"name": "GetStops",
+			"url": "https://localhost:7002/api/Stops",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "be13c1dd-72cf-4915-b563-b3113d55b58d",
+			"name": "GetStopById",
+			"url": "https://localhost:7002/api/Stops/1",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "945fc62a-87e6-4b39-ba8a-8e484056b61c",
+			"name": "GetStopByIdShouldReturn404",
+			"url": "https://localhost:7002/api/Stops/-1",
+			"time": 4,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "561ce4dd-ad00-4049-aeb7-527d0acfb4e5",
+			"name": "CreateStop",
+			"url": "https://localhost:7002/api/Stops",
+			"time": 19,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d453ce9c-fd22-417a-8c9c-c081752a58e8",
+			"name": "CreateStopShouldReturn409",
+			"url": "https://localhost:7002/api/Stops",
+			"time": 4,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "242e2b03-8351-413d-9daf-0de581db9274",
+			"name": "EditStop",
+			"url": "https://localhost:7002/api/Stops/16",
+			"time": 19,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b5389ed2-54a7-4fe1-97fe-bbf6cca111ee",
+			"name": "GetEditedStop",
+			"url": "https://localhost:7002/api/Routes/16",
+			"time": 4,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "aa5d8025-80db-48a5-b8bf-73f02c024c7d",
+			"name": "SearchStop",
+			"url": "https://localhost:7002/api/Stops/search?name=Hau",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "abb6e5ed-f8d8-4214-b6ee-d7f41ccac7fd",
+			"name": "NearbyStops",
+			"url": "https://localhost:7002/api/Stops/nearby?latitude=10&longitude=10",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2f79f383-1437-4ec3-b963-c664f111403c",
+			"name": "DeleteStop",
+			"url": "https://localhost:7002/api/Stops/16",
+			"time": 15,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 96,
+	"collection": {
+		"requests": [
+			{
+				"id": "2f6eea6b-c21f-4435-adb8-14f759ab8e0f",
+				"method": "GET"
+			},
+			{
+				"id": "be13c1dd-72cf-4915-b563-b3113d55b58d",
+				"method": "GET"
+			},
+			{
+				"id": "945fc62a-87e6-4b39-ba8a-8e484056b61c",
+				"method": "GET"
+			},
+			{
+				"id": "561ce4dd-ad00-4049-aeb7-527d0acfb4e5",
+				"method": "POST"
+			},
+			{
+				"id": "d453ce9c-fd22-417a-8c9c-c081752a58e8",
+				"method": "POST"
+			},
+			{
+				"id": "242e2b03-8351-413d-9daf-0de581db9274",
+				"method": "PUT"
+			},
+			{
+				"id": "b5389ed2-54a7-4fe1-97fe-bbf6cca111ee",
+				"method": "GET"
+			},
+			{
+				"id": "aa5d8025-80db-48a5-b8bf-73f02c024c7d",
+				"method": "GET"
+			},
+			{
+				"id": "abb6e5ed-f8d8-4214-b6ee-d7f41ccac7fd",
+				"method": "GET"
+			},
+			{
+				"id": "2f79f383-1437-4ec3-b963-c664f111403c",
+				"method": "DELETE"
+			}
+		]
+	}
+}

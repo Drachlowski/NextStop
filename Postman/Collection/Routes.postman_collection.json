@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "e38b6f29-1dc4-4a36-b4b6-b8654f27ac7e",
+		"name": "Routes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40444845"
+	},
+	"item": [
+		{
+			"name": "GetRoutes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRouteById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRouteByIdShouldReturn404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/-1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRoute",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"routeName\": \"Irgendeine Route\",\r\n  \"validityStartDate\": \"2024-12-21T08:10:02.931Z\",\r\n  \"validityEndDate\": null,\r\n  \"daysOfOperation\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Routes",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRouteShouldReturn409",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"routeName\": \"Irgendeine Route\",\r\n  \"validityStartDate\": \"2024-12-21T08:10:02.931Z\",\r\n  \"validityEndDate\": null,\r\n  \"daysOfOperation\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Routes",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditRoute",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"routeName\": \"Irgendeine Route 123 456\",\r\n  \"validityStartDate\": \"2024-12-21T08:10:02.931Z\",\r\n  \"validityEndDate\": \"2025-01-01\",\r\n  \"daysOfOperation\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/4",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEditedRoute",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/4",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRoute",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/Routes/4",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"Routes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

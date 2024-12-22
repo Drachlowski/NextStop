@@ -1,0 +1,66 @@
+{
+	"id": "878ac9ce-e59e-49de-a7aa-db0caba0bd78",
+	"name": "CheckIn",
+	"timestamp": "2024-12-22T22:36:47.916Z",
+	"collection_id": "40444845-ef009c12-1f2e-45a5-b56a-d18ceff9bcb7",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:36:47.434Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e2349c36-fc02-42cc-8eff-462f2d68d37a",
+			"name": "GetCheckInsByTripId",
+			"url": "https://localhost:7002/api/TripCheckIn/1",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "dc890a99-6f11-4e4c-a3b5-5eed48d7aed8",
+			"name": "CheckIn",
+			"url": "https://localhost:7002/api/TripCheckIn",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 22,
+	"collection": {
+		"requests": [
+			{
+				"id": "e2349c36-fc02-42cc-8eff-462f2d68d37a",
+				"method": "GET"
+			},
+			{
+				"id": "dc890a99-6f11-4e4c-a3b5-5eed48d7aed8",
+				"method": "POST"
+			}
+		]
+	}
+}

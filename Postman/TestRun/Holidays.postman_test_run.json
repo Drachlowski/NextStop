@@ -1,0 +1,264 @@
+{
+	"id": "a8153d2d-4c9f-4057-a0dd-f974e649b6c7",
+	"name": "Holidays",
+	"timestamp": "2024-12-22T22:27:09.157Z",
+	"collection_id": "40444845-8033e6e9-857c-4c9d-8054-fdcecbbdf813",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:27:08.065Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "11d363d1-71f6-4663-849c-a9731842c553",
+			"name": "GetHolidays",
+			"url": "https://localhost:7002/api/Holidays",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fdb45c4a-bbfa-432e-bafa-cc108505cc0f",
+			"name": "GetHolidaysByDate",
+			"url": "https://localhost:7002/api/Holidays?date=2024-12-25",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0d6fcb95-1a9c-4fbc-b345-b02697bd5e4c",
+			"name": "GetHolidaysByDateRange",
+			"url": "https://localhost:7002/api/Holidays?date=2024-12-25&endDate=2025-01-31",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "739f28d7-2f14-43db-97ee-93b46aad8ab5",
+			"name": "GetHolidaysByDateRangeAndSchoolHolidaysOnly",
+			"url": "https://localhost:7002/api/Holidays?date=2024-12-25&endDate=2025-01-31&schoolHolidaysOnly=true",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "efaabb75-06e3-4712-a2d9-d8615a95cfd1",
+			"name": "GetHolidayById",
+			"url": "https://localhost:7002/api/Holidays/1",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3585dfbc-a693-44d6-892b-7e8a75b20fbb",
+			"name": "GetHolidayByIdShouldReturn404",
+			"url": "https://localhost:7002/api/Holidays/-1",
+			"time": 4,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "95a81a78-06a7-456e-af6f-17e332d05add",
+			"name": "CreateHolidays",
+			"url": "https://localhost:7002/api/Holidays",
+			"time": 28,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				28
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2295352a-a30c-4393-8692-4ff373f08afd",
+			"name": "CreateHolidaysShouldReturn409",
+			"url": "https://localhost:7002/api/Holidays",
+			"time": 4,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "73cf3562-7a06-45aa-ad2a-02fbc6cebc01",
+			"name": "EditHolidays",
+			"url": "https://localhost:7002/api/Holidays/27",
+			"time": 12,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "945c7a1a-bc2d-4bb9-bf26-5d0c0d72faaa",
+			"name": "GetEditedHoliday",
+			"url": "https://localhost:7002/api/Holidays/27",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d4cc8835-8957-4fd3-9da4-a05726339747",
+			"name": "DeleteHolidays",
+			"url": "https://localhost:7002/api/Holidays/27",
+			"time": 11,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 84,
+	"collection": {
+		"requests": [
+			{
+				"id": "11d363d1-71f6-4663-849c-a9731842c553",
+				"method": "GET"
+			},
+			{
+				"id": "fdb45c4a-bbfa-432e-bafa-cc108505cc0f",
+				"method": "GET"
+			},
+			{
+				"id": "0d6fcb95-1a9c-4fbc-b345-b02697bd5e4c",
+				"method": "GET"
+			},
+			{
+				"id": "739f28d7-2f14-43db-97ee-93b46aad8ab5",
+				"method": "GET"
+			},
+			{
+				"id": "efaabb75-06e3-4712-a2d9-d8615a95cfd1",
+				"method": "GET"
+			},
+			{
+				"id": "3585dfbc-a693-44d6-892b-7e8a75b20fbb",
+				"method": "GET"
+			},
+			{
+				"id": "95a81a78-06a7-456e-af6f-17e332d05add",
+				"method": "POST"
+			},
+			{
+				"id": "2295352a-a30c-4393-8692-4ff373f08afd",
+				"method": "POST"
+			},
+			{
+				"id": "73cf3562-7a06-45aa-ad2a-02fbc6cebc01",
+				"method": "PUT"
+			},
+			{
+				"id": "945c7a1a-bc2d-4bb9-bf26-5d0c0d72faaa",
+				"method": "GET"
+			},
+			{
+				"id": "d4cc8835-8957-4fd3-9da4-a05726339747",
+				"method": "DELETE"
+			}
+		]
+	}
+}

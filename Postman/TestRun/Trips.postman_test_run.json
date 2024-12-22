@@ -1,0 +1,198 @@
+{
+	"id": "3af6acc6-e912-415b-992d-cc9ed36842fd",
+	"name": "Trips",
+	"timestamp": "2024-12-22T22:32:29.696Z",
+	"collection_id": "40444845-502bbdd1-756d-4e77-baed-940cf0f6d894",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:32:28.741Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "784d171b-0fcb-449d-8dc4-99b5c84eb18d",
+			"name": "GetTrips",
+			"url": "https://localhost:7002/api/Trips",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "00c78c8b-0c0d-4388-8a5f-43e2043bddb3",
+			"name": "GetNextDeparturesFromStop",
+			"url": "https://localhost:7002/api/Trips/next-departures/1?currentTime=2024-12-22",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "77cc19fc-1521-4484-aa12-ad376f1c35ca",
+			"name": "GetTripById",
+			"url": "https://localhost:7002/api/Trips",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6e945b6c-143d-4d47-b96a-728733b1c71d",
+			"name": "CreateTrip",
+			"url": "https://localhost:7002/api/Trips",
+			"time": 14,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f37321c8-5a42-4be4-8340-4e316972f06a",
+			"name": "EditTrip",
+			"url": "https://localhost:7002/api/Trips/2",
+			"time": 12,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e7bec843-b697-4691-ae1c-7fb5038810ab",
+			"name": "GetEditedTrip",
+			"url": "https://localhost:7002/api/Trips/2",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "75837c86-4a95-496e-b9cd-10f7ef3be9f9",
+			"name": "DeleteTrip",
+			"url": "https://localhost:7002/api/Trips/2",
+			"time": 12,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "880ffc61-1f95-4c1a-a703-91c91a0648ed",
+			"name": "GetTimeTable",
+			"url": "https://localhost:7002/api/Trips/timetable",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 65,
+	"collection": {
+		"requests": [
+			{
+				"id": "784d171b-0fcb-449d-8dc4-99b5c84eb18d",
+				"method": "GET"
+			},
+			{
+				"id": "00c78c8b-0c0d-4388-8a5f-43e2043bddb3",
+				"method": "GET"
+			},
+			{
+				"id": "77cc19fc-1521-4484-aa12-ad376f1c35ca",
+				"method": "GET"
+			},
+			{
+				"id": "6e945b6c-143d-4d47-b96a-728733b1c71d",
+				"method": "POST"
+			},
+			{
+				"id": "f37321c8-5a42-4be4-8340-4e316972f06a",
+				"method": "PUT"
+			},
+			{
+				"id": "e7bec843-b697-4691-ae1c-7fb5038810ab",
+				"method": "GET"
+			},
+			{
+				"id": "75837c86-4a95-496e-b9cd-10f7ef3be9f9",
+				"method": "DELETE"
+			},
+			{
+				"id": "880ffc61-1f95-4c1a-a703-91c91a0648ed",
+				"method": "POST"
+			}
+		]
+	}
+}

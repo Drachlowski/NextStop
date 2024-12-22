@@ -1,0 +1,198 @@
+{
+	"id": "19547050-3750-4475-859c-63a775d3110d",
+	"name": "Routes",
+	"timestamp": "2024-12-22T22:28:07.304Z",
+	"collection_id": "40444845-e38b6f29-1dc4-4a36-b4b6-b8654f27ac7e",
+	"folder_id": 0,
+	"environment_id": "40444845-e49a5285-304d-49ce-b50a-02edd01ddad8",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-22T22:28:06.349Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "199bdfcf-4761-45cc-9ccd-ca95331e1b96",
+			"name": "GetRoutes",
+			"url": "https://localhost:7002/api/Routes",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "11bc0542-d398-4190-93aa-52ec4a9c7c91",
+			"name": "GetRouteById",
+			"url": "https://localhost:7002/api/Routes/1",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "eea2d47a-c0f9-4d5a-962b-d7a70fd734d4",
+			"name": "GetRouteByIdShouldReturn404",
+			"url": "https://localhost:7002/api/Routes/-1",
+			"time": 5,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "744bef6c-518a-46f9-a311-4c73fa44525c",
+			"name": "CreateRoute",
+			"url": "https://localhost:7002/api/Routes",
+			"time": 22,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a0f8029f-7fd2-468f-9cae-9f2d281b7114",
+			"name": "CreateRouteShouldReturn409",
+			"url": "https://localhost:7002/api/Routes",
+			"time": 4,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7a9d2309-df32-4558-bc41-0dc0f88056a7",
+			"name": "EditRoute",
+			"url": "https://localhost:7002/api/Routes/4",
+			"time": 23,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				23
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "aab9820c-7e1c-4c6e-a188-47670902c3ba",
+			"name": "GetEditedRoute",
+			"url": "https://localhost:7002/api/Routes/4",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "570ddcfc-bfd8-4a0a-91ff-26811010514f",
+			"name": "DeleteRoute",
+			"url": "https://localhost:7002/api/Routes/4",
+			"time": 27,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				27
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 114,
+	"collection": {
+		"requests": [
+			{
+				"id": "199bdfcf-4761-45cc-9ccd-ca95331e1b96",
+				"method": "GET"
+			},
+			{
+				"id": "11bc0542-d398-4190-93aa-52ec4a9c7c91",
+				"method": "GET"
+			},
+			{
+				"id": "eea2d47a-c0f9-4d5a-962b-d7a70fd734d4",
+				"method": "GET"
+			},
+			{
+				"id": "744bef6c-518a-46f9-a311-4c73fa44525c",
+				"method": "POST"
+			},
+			{
+				"id": "a0f8029f-7fd2-468f-9cae-9f2d281b7114",
+				"method": "POST"
+			},
+			{
+				"id": "7a9d2309-df32-4558-bc41-0dc0f88056a7",
+				"method": "PUT"
+			},
+			{
+				"id": "aab9820c-7e1c-4c6e-a188-47670902c3ba",
+				"method": "GET"
+			},
+			{
+				"id": "570ddcfc-bfd8-4a0a-91ff-26811010514f",
+				"method": "DELETE"
+			}
+		]
+	}
+}
