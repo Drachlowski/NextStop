@@ -1,8 +1,7 @@
-﻿using NextStop.Domain;
+﻿namespace NextStop.Server.DTOs.Route;
 
-namespace NextStop.Server.DTOs;
 
-public class RouteForCreationDto
+public class RouteForUpdateDto
 {
     public required int Id { get; set; } // ID hinzugefügt
     public required string RouteName { get; set; } = string.Empty;

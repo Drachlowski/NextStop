@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NextStop.Domain;
-using NextStop.Server.DTOs;
 using NextStop.Server.Services;
 using NextStop.Server.Mappers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NextStop.Server.DTOs.Route;
+using NextStop.Server.DTOs;
 using Microsoft.AspNetCore.Authorization;
 
 namespace NextStop.Server.Controllers;
@@ -98,4 +99,12 @@ public class RoutesController : ControllerBase
         await _routeService.DeleteRouteAsync(id);
         return NoContent();
     }
+
+    [HttpGet("statistics/delay")]
+    public async Task<ActionResult<IEnumerable<DelayStatistic>>> GetDelayStatistics([FromQuery] StatisticRequestDto req)
+    {;
+        var statistics = await _routeService.GetRouteDelayStatisticsAsync(req.StartDate, req.EndDate, req.RouteId);
+        return Ok(statistics);
+    }
+
 }

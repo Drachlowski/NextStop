@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NextStop.Domain;
-using NextStop.Server.DTOs;
+using NextStop.Server.DTOs.RouteStop;
 using NextStop.Server.Mappers;
 using NextStop.Server.Services;
 using System.Collections.Generic;

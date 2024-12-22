@@ -1,8 +1,8 @@
 ﻿namespace NextStop.Server.Mappers;
 
-using NextStop.Server.DTOs;
 using NextStop.Domain;
 using Riok.Mapperly.Abstractions;
+using NextStop.Server.DTOs.Route;
 
 [Mapper]
 public static partial class RouteMapper

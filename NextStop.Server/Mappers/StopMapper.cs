@@ -1,7 +1,7 @@
 ﻿namespace NextStop.Server.Mappers;
 
 using NextStop.Domain;
-using NextStop.Server.DTOs;
+using NextStop.Server.DTOs.Stop;
 using Riok.Mapperly.Abstractions;
 
 [Mapper]

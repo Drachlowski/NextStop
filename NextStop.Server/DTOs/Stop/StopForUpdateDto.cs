@@ -1,6 +1,6 @@
 ﻿using NextStop.Domain;
 
-namespace NextStop.Server.DTOs;
+namespace NextStop.Server.DTOs.Stop;
 
 public class StopForUpdateDto
 {

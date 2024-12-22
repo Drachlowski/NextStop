@@ -11,4 +11,6 @@ public interface IRouteService
     Task DeleteRouteAsync(int id);
     Task<bool> HasLinkedStopsAsync(int routeId);
     Task<bool> RouteExistsAsync(int id);
+
+    Task<IEnumerable<DelayStatistic>> GetRouteDelayStatisticsAsync(DateTime startDate, DateTime endDate, int? routeId = null);
 }

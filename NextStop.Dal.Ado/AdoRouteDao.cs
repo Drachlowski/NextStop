@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace NextStop.Dal.Ado;
 
-public class AdoRouteDao : IRouteDao
+public class AdoRouteDao(IConnectionFactory connectionFactory, string routeTableName) : IRouteDao
 {
-    private readonly IConnectionFactory _connectionFactory;
-    private readonly AdoTemplate _template;
-
-    public AdoRouteDao(IConnectionFactory connectionFactory)
-    {
-        _connectionFactory = connectionFactory;
-        _template = new AdoTemplate(connectionFactory);
-    }
+    private readonly IConnectionFactory _connectionFactory = connectionFactory;
+    private readonly AdoTemplate _template = new AdoTemplate(connectionFactory);
+    private readonly string routeTableName = routeTableName;
 
     private Route MapRowToRoute(IDataRecord row) => new Route(
         id: (int)row["Id"],
@@ -29,7 +24,7 @@ public class AdoRouteDao : IRouteDao
     public async Task<Route?> GetRouteByIdAsync(int id)
     {
         return await _template.QuerySingleAsync(
-            "SELECT Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation FROM Route WHERE Id = @id",
+            $"SELECT Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation FROM {routeTableName} WHERE Id = @id",
             MapRowToRoute,
             new QueryParameter("id", id)
         );
@@ -38,7 +33,7 @@ public class AdoRouteDao : IRouteDao
     public async Task<IEnumerable<Route>> GetAllRoutesAsync()
     {
         return await _template.QueryAsync(
-            "SELECT Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation FROM Route",
+            $"SELECT Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation FROM {routeTableName}",
             MapRowToRoute
         );
     }
@@ -46,7 +41,7 @@ public class AdoRouteDao : IRouteDao
     public async Task<IEnumerable<Route>> GetActiveRoutesAsync(DateTime date)
     {
         return await _template.QueryAsync(
-            "SELECT Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation FROM Route WHERE ValidityStartDate <= @date AND (ValidityEndDate IS NULL OR ValidityEndDate >= @date)",
+            $"SELECT Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation FROM {routeTableName} WHERE ValidityStartDate <= @date AND (ValidityEndDate IS NULL OR ValidityEndDate >= @date)",
             MapRowToRoute,
             new QueryParameter("date", date)
         );
@@ -55,12 +50,12 @@ public class AdoRouteDao : IRouteDao
     public async Task AddRouteAsync(Route route)
     {
         await _template.ExecuteAsync(
-            """
-                SET IDENTITY_INSERT Route ON;
+            $"""
+                SET IDENTITY_INSERT {routeTableName} ON;
             
-                INSERT INTO Route (Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation) VALUES (@id, @routeName, @validityStartDate, @validityEndDate, @daysOfOperation);
+                INSERT INTO {routeTableName} (Id, RouteName, ValidityStartDate, ValidityEndDate, DaysOfOperation) VALUES (@id, @routeName, @validityStartDate, @validityEndDate, @daysOfOperation);
             
-                SET IDENTITY_INSERT Route OFF;
+                SET IDENTITY_INSERT {routeTableName} OFF;
             """,
             new QueryParameter("id", route.Id),
             new QueryParameter("routeName", route.RouteName),
@@ -73,7 +68,7 @@ public class AdoRouteDao : IRouteDao
     public async Task UpdateRouteAsync(Route route)
     {
         await _template.ExecuteAsync(
-            "UPDATE Route SET RouteName = @routeName, ValidityStartDate = @validityStartDate, ValidityEndDate = @validityEndDate, DaysOfOperation = @daysOfOperation WHERE Id = @id",
+            $"UPDATE {routeTableName} SET RouteName = @routeName, ValidityStartDate = @validityStartDate, ValidityEndDate = @validityEndDate, DaysOfOperation = @daysOfOperation WHERE Id = @id",
             new QueryParameter("id", route.Id),
             new QueryParameter("routeName", route.RouteName),
             new QueryParameter("validityStartDate", route.ValidityStartDate),
@@ -85,7 +80,7 @@ public class AdoRouteDao : IRouteDao
     public async Task DeleteRouteAsync(int id)
     {
         await _template.ExecuteAsync(
-            "DELETE FROM Route WHERE Id = @id",
+            $"DELETE FROM {routeTableName} WHERE Id = @id",
             new QueryParameter("id", id)
         );
     }

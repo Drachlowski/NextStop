@@ -1,4 +1,5 @@
 ﻿using NextStop.Domain;
+using System.Collections.Generic;
 
 namespace NextStop.Dal.Interface;
 
@@ -17,4 +18,5 @@ public interface ITripDao
     Task<double> GetAverageDelayForRouteAsync(int routeId);
     Task<IEnumerable<Trip>> GetActiveTripsAsync(DateTime currentTime);
     Task<IEnumerable<Trip>> GetTripsPaginatedAsync(int page, int pageSize);
+    Task<IEnumerable<(Trip Trip, RouteStop RouteStop)>> GetNextTripsForStopAsync(int stopId, DateTime currentTimestamp, int limit);
 }
