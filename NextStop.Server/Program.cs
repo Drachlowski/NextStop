@@ -2,6 +2,7 @@ using NextStop.Common.Database;
 using NextStop.Dal.Ado;
 using NextStop.Dal.Interface;
 using NextStop.Server.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 IConfiguration configuration = ConfigurationUtil.GetConfiguration();
 string? holidayTableName = configuration["HolidayTableName"];
@@ -31,6 +32,21 @@ builder.Services.AddScoped<IStopService, StopService>();
 
 builder.Services.AddScoped<IRouteStopDao>(sp => new AdoRouteStopDao(connectionFactory));
 builder.Services.AddScoped<IRouteStopService, RouteStopService>();
+
+//add keycloak authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = configuration["Authentication:Keycloak:Authority"];
+        options.Audience = configuration["Authentication:Keycloak:ClientId"];
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = $"{configuration["Authentication:Keycloak:Authority"]}/protocol/openid-connect",
+        };
+    });
 
 var app = builder.Build();
 
