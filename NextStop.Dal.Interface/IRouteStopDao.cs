@@ -10,6 +10,7 @@ namespace NextStop.Dal.Interface;
 public interface IRouteStopDao
 {
     Task<RouteStop?> GetRouteStopByIdAsync(int id);
+    Task<RouteStop?> GetRouteStopByRouteIdAndStopIdAsync(int routeId, int stopId);
     Task<IEnumerable<RouteStop>> GetAllRouteStopsAsync();
     Task<IEnumerable<Route>> GetAllRoutesForStopAsync(int stopId);
     Task<IEnumerable<Stop>> GetAllStopsForRouteAsync(int routeId);

@@ -1,5 +1,5 @@
 ﻿using NextStop.Dal.Domain;
-using NextStop.Server.DTOs;
+using NextStop.Server.DTOs.Holiday;
 using Riok.Mapperly.Abstractions;
 
 namespace NextStop.Server.Mappers;

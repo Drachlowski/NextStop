@@ -48,11 +48,25 @@ CREATE TABLE RouteStop (
 CREATE TABLE Trip (
     Id INT PRIMARY KEY IDENTITY(1,1),
     RouteId INT NOT NULL,                  -- Die Route, die befahren wird
-    StartTime TIME NOT NULL,               -- Geplante Startzeit der Fahrt
+    StartTime DATETIME NOT NULL,           -- Geplante Startzeit der Fahrt
     CurrentDelay INT DEFAULT 0,            -- Verspätung in Minuten (wird in Echtzeit angepasst)
     
     FOREIGN KEY (RouteId) REFERENCES Route(Id) ON DELETE CASCADE
 );
+
+CREATE TABLE TripCheckIn (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    TripId INT NOT NULL,                                -- Verweis auf den Trip
+    RouteStopId INT NOT NULL,                           -- Haltestelle, an der eingecheckt wurde
+    CheckInTime DATETIME NOT NULL DEFAULT GETDATE(),    -- Zeitpunkt des Eincheckens
+    CurrentDelay INT NOT NULL,                          -- Aktuelle Verspätung in Minuten
+
+    FOREIGN KEY (TripId) REFERENCES Trip(Id) ON DELETE NO ACTION,
+    FOREIGN KEY (RouteStopId) REFERENCES RouteStop(Id) ON DELETE NO ACTION
+);
+
+CREATE INDEX IDX_TripCheckIn_TripId ON TripCheckIn(TripId);
+CREATE INDEX IDX_TripCheckIn_StopId ON TripCheckIn(RouteStopId);
 
 
 CREATE INDEX IDX_Stop_Name ON Stop(Name);

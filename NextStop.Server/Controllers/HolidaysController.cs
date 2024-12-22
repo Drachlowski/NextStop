@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NextStop.Dal.Domain;
-using NextStop.Server.DTOs;
+using NextStop.Server.DTOs.Holiday;
 using NextStop.Server.Mappers;
 using NextStop.Server.Services;
 

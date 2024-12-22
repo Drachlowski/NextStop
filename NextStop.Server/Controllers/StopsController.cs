@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NextStop.Domain;
-using NextStop.Server.DTOs;
 using NextStop.Server.Services;
 using NextStop.Server.Mappers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NextStop.Server.DTOs.Stop;
 
 namespace NextStop.Server.Controllers;
 

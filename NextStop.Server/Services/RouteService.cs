@@ -3,16 +3,21 @@
 
 using NextStop.Dal.Interface;
 using NextStop.Domain;
+using NextStop.Server.DTOs.TripCheckIn;
 
 public class RouteService : IRouteService
 {
     private readonly IRouteDao _routeDao;
-    //private readonly IRouteStopDao _routeStopDao;
+    private readonly ITripCheckInDao _tripCheckInDao;
+    private readonly IRouteStopDao _routeStopDao;
+    private readonly IStatisticDao _statisticDao;
 
-    public RouteService(IRouteDao routeDao) //, IRouteStopDao routeStopDao)
+    public RouteService(IRouteDao routeDao, ITripCheckInDao tripCheckInDao, IRouteStopDao routeStopDao, IStatisticDao statisticDao)
     {
         _routeDao = routeDao;
-        //_routeStopDao = routeStopDao;
+        _tripCheckInDao = tripCheckInDao;
+        _routeStopDao = routeStopDao;
+        _statisticDao = statisticDao;
     }
 
     public async Task<IEnumerable<Route>> GetAllRoutesAsync()
@@ -42,13 +47,19 @@ public class RouteService : IRouteService
 
     public async Task<bool> HasLinkedStopsAsync(int routeId)
     {
-        return await Task.FromResult(false);
-        //var stops = await _routeStopDao.GetAllStopsForRouteAsync(routeId);
-        //return stops.Any();
+        //return await Task.FromResult(false);
+        var stops = await _routeStopDao.GetAllStopsForRouteAsync(routeId);
+        return stops.Any();
     }
 
     public async Task<bool> RouteExistsAsync(int id)
     {
         return await GetRouteByIdAsync(id) is not null;
     }
+
+    public async Task<IEnumerable<DelayStatistic>> GetRouteDelayStatisticsAsync(DateTime startDate, DateTime endDate, int? routeId = null)
+    {
+        return await _statisticDao.GetRouteDelayStatisticsAsync(startDate, endDate, routeId);
+    }
+
 }

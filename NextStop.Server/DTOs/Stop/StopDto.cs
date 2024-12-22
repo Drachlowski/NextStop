@@ -1,4 +1,4 @@
-﻿namespace NextStop.Server.DTOs;
+﻿namespace NextStop.Server.DTOs.Stop;
 
 public class StopDto
 {
