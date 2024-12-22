@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NextStop.Dal.Domain;
 using NextStop.Server.DTOs;
 using NextStop.Server.Mappers;
@@ -6,12 +7,14 @@ using NextStop.Server.Services;
 
 namespace NextStop.Server.Controllers;
 
+
 [Route("/api/[controller]")]
 [ApiController]
 public class HolidaysController(IHolidayService _holidayService) : ControllerBase
 {
     private readonly IHolidayService _holidayService = _holidayService;
 
+    [Authorize(Roles = "Admin, User")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpGet]
@@ -46,6 +49,7 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
         return Ok(holidays.Select(c => c.ToHolidayDto()));
     }
 
+    [Authorize(Roles = "Admin, User")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -60,6 +64,7 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
         return Ok(holiday.ToHolidayDto());
     }
 
+    [Authorize(Roles = "Admin")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -81,6 +86,7 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
         );
     }
 
+    [Authorize(Roles = "Admin")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -96,6 +102,7 @@ public class HolidaysController(IHolidayService _holidayService) : ControllerBas
         return NoContent();
     }
 
+    [Authorize(Roles = "Admin")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -6,6 +6,7 @@ using NextStop.Server.Mappers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NextStop.Server.Controllers;
 
@@ -21,6 +22,8 @@ public class StopsController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin, User")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<StopDto>>> GetAllStops()
     {
         var stops = await _stopService.GetAllStopsAsync();
@@ -28,6 +31,9 @@ public class StopsController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Admin, User")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<StopDto>> GetStopById(int id)
     {
         var stop = await _stopService.GetStopByIdAsync(id);
@@ -39,6 +45,9 @@ public class StopsController : ControllerBase
     }
 
     [HttpGet("search")]
+    [Authorize(Roles = "Admin, User")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<IEnumerable<StopDto>>> GetStopsByName([FromQuery] string name)
     {
         var stops = await _stopService.GetStopsByNameAsync(name);
@@ -46,6 +55,9 @@ public class StopsController : ControllerBase
     }
 
     [HttpGet("nearby")]
+    [Authorize(Roles = "Admin, User")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<IEnumerable<StopDto>>> GetNextStopsByCoordinates([FromQuery] double latitude, [FromQuery] double longitude)
     {
         var stops = await _stopService.GetNextStopsByCoordinatesAsync(latitude, longitude);
@@ -53,6 +65,10 @@ public class StopsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult<StopDto>> AddStop([FromBody] StopForCreationDto stopDto)
     {
         if (await _stopService.StopExistsAsync(stopDto.Id))
@@ -65,6 +81,10 @@ public class StopsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> UpdateStop(int id, [FromBody] StopForUpdateDto stopDto)
     {
         var stop = await _stopService.GetStopByIdAsync(id);
@@ -79,6 +99,10 @@ public class StopsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> DeleteStop(int id)
     {
         if (!await _stopService.StopExistsAsync(id))

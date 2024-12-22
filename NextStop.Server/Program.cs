@@ -37,14 +37,18 @@ builder.Services.AddScoped<IRouteStopService, RouteStopService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = configuration["Authentication:Keycloak:Authority"];
-        options.Audience = configuration["Authentication:Keycloak:ClientId"];
+        //options.Authority = configuration["Authentication:Keycloak:Authority"];
+        //options.Audience = configuration["Authentication:Keycloak:ClientId"];
+        options.Authority = "http://localhost:8081/realms/NextStopRealm"; 
+        options.Audience = "nextstop-server";
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidIssuer = $"{configuration["Authentication:Keycloak:Authority"]}/protocol/openid-connect",
+            RoleClaimType = "realm_access.roles"
         };
     });
 

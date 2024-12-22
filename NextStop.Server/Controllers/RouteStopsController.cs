@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NextStop.Domain;
 using NextStop.Server.DTOs;
 using NextStop.Server.Mappers;
@@ -25,6 +26,8 @@ public class RouteStopsController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin, User")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<RouteStopDto>>> GetAllRouteStops()
     {
         var routeStops = await _routeStopService.GetAllRouteStopsAsync();
@@ -32,6 +35,9 @@ public class RouteStopsController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Admin, User")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<RouteStopDto>> GetRouteStopById(int id)
     {
         var routeStop = await _routeStopService.GetRouteStopByIdAsync(id);
@@ -43,6 +49,10 @@ public class RouteStopsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult<RouteStopDto>> AddRouteStop([FromBody] RouteStopForCreationDto routeStopDto)
     {
         if (await _routeStopService.RouteStopExistsAsync(routeStopDto.Id))
@@ -70,6 +80,10 @@ public class RouteStopsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateRouteStop(int id, [FromBody] RouteStopForUpdateDto routeStopDto)
     {
         var existingRouteStop = await _routeStopService.GetRouteStopByIdAsync(id);
@@ -98,6 +112,10 @@ public class RouteStopsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> DeleteRouteStop(int id)
     {
         if (!await _routeStopService.RouteStopExistsAsync(id))
