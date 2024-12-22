@@ -25,6 +25,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetAllTrips()
     {
         var trips = await _tripService.GetAllTripsAsync();
@@ -32,6 +34,9 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TripDto>> GetTripById(int id)
     {
         var trip = await _tripService.GetTripByIdAsync(id);
@@ -43,6 +48,11 @@ public class TripsController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult<TripDto>> AddTrip([FromBody] TripForCreationDto tripDto)
     {
         if (await _tripService.TripExistsAsync(tripDto.Id))
@@ -62,6 +72,10 @@ public class TripsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateTrip(int id, [FromBody] TripForUpdateDto tripDto)
     {
         var existingTrip = await _tripService.GetTripByIdAsync(id);
@@ -83,6 +97,9 @@ public class TripsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteTrip(int id)
     {
         if (!await _tripService.TripExistsAsync(id))
@@ -95,6 +112,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("ByRoute/{routeId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetTripsByRouteId(int routeId)
     {
         var trips = await _tripService.GetTripsByRouteIdAsync(routeId);
@@ -102,6 +121,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("ByDate")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetTripsByDate([FromQuery] DateTime date)
     {
         var trips = await _tripService.GetTripsByDateAsync(date);
@@ -109,6 +130,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("WithCurrentDelay")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetTripsWithCurrentDelay()
     {
         var trips = await _tripService.GetTripsWithCurrentDelayAsync();
@@ -116,6 +139,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("ByTimeRange")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetTripsByTimeRange([FromQuery] DateTime startTime, [FromQuery] DateTime endTime)
     {
         var trips = await _tripService.GetTripsByTimeRangeAsync(startTime, endTime);
@@ -123,6 +148,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("Delayed/{routeId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetDelayedTripsByRouteId(int routeId)
     {
         var trips = await _tripService.GetDelayedTripsByRouteIdAsync(routeId);
@@ -130,6 +157,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("AverageDelay/{routeId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<double>> GetAverageDelayForRoute(int routeId)
     {
         var averageDelay = await _tripService.GetAverageDelayForRouteAsync(routeId);
@@ -137,6 +166,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("Active")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetActiveTrips([FromQuery] DateTime currentTime)
     {
         var trips = await _tripService.GetActiveTripsAsync(currentTime);
@@ -144,6 +175,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("Paginated")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TripDto>>> GetTripsPaginated([FromQuery] int page, [FromQuery] int pageSize)
     {
         var trips = await _tripService.GetTripsPaginatedAsync(page, pageSize);
@@ -151,6 +184,9 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet("next-departures/{stopId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<IEnumerable<TripForNextDeparturesDto>>> GetNextDeparturesForStop(
         int stopId,
         [FromQuery] DateTime? currentTime = null,
@@ -173,6 +209,8 @@ public class TripsController : ControllerBase
     }
 
     [HttpPost("timetable")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TimetableResponseDto>>> GetTimetable([FromBody] TimetableRequestDto request)
     {
         var timetable = await _tripService.GetTimetableAsync(request.StartStopId, request.EndStopId, request.DepartureTime);

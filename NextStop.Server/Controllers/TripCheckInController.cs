@@ -21,6 +21,9 @@ public class TripCheckInController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> AddCheckIn([FromBody] TripCheckInDto checkInDto)
     {
         var trip = await _tripService.GetTripByIdAsync(checkInDto.TripId);
@@ -39,6 +42,8 @@ public class TripCheckInController : ControllerBase
     }
 
     [HttpGet("{tripId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCheckInsForTrip(int tripId)
     {
         var checkIns = await _tripCheckInService.GetCheckInsForTripAsync(tripId);
@@ -46,6 +51,9 @@ public class TripCheckInController : ControllerBase
     }
 
     [HttpGet("{tripId}/latest")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetLatestCheckIn(int tripId)
     {
         var latestCheckIn = await _tripCheckInService.GetLatestCheckInForTripAsync(tripId);

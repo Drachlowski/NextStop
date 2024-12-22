@@ -116,7 +116,12 @@ namespace NextStop.Dal.Ado
         public async Task<IEnumerable<Stop>> GetAllStopsForRouteAsync(int routeId)
         {
             return await _template.QueryAsync(
-                $"SELECT DISTINCT Stop.* FROM {stopTableName} Stop JOIN {routeStopTableName} RouteStop ON Stop.Id = RouteStop.StopId WHERE RouteStop.RouteId = @routeId",
+                $"""
+                    SELECT DISTINCT Stop.* 
+                    FROM {stopTableName} Stop 
+                    JOIN {routeStopTableName} RouteStop ON Stop.Id = RouteStop.StopId 
+                    WHERE RouteStop.RouteId = @routeId
+                """,
                 row => new Stop(
                     id: (int)row["Id"],
                     name: (string)row["Name"],
