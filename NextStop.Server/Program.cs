@@ -3,6 +3,9 @@ using NextStop.Dal.Ado;
 using NextStop.Dal.Interface;
 using NextStop.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Extensions;
 
 IConfiguration configuration = ConfigurationUtil.GetConfiguration();
 string? holidayTableName = configuration["HolidayTableName"];
@@ -72,6 +75,16 @@ builder.Services.AddScoped<ITripCheckInService, TripCheckInService>();
 
 builder.Services.AddScoped<IStatisticDao>(sp => new AdoStatisticDao(connectionFactory, tripCheckInTableName, tripTableName, routeStopTableName, routeTableName));
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("*");
+                      });
+});
+
 
 //add keycloak authentication
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -104,4 +117,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors(b =>
+{
+    b.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+});
+
+ISwaggerProvider sw = app.Services.GetRequiredService<ISwaggerProvider>();
+OpenApiDocument doc = sw.GetSwagger("v1", "/");
+string swaggerFile = doc.SerializeAsJson(Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_0);
+File.WriteAllText("swaggerfile.json", swaggerFile);
+
 app.Run();

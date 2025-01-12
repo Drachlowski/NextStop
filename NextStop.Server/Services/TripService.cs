@@ -92,7 +92,7 @@ public class TripService : ITripService
     {
         return await _tripDao.GetNextTripsForStopAsync(stopId, currentTime, limit);
     }
-
+    
     public async Task<IEnumerable<TimetableResponseDto>> GetTimetableAsync(int startStopId, int endStopId, DateTime? departureTime)
     {
         departureTime ??= DateTime.Now;
